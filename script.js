@@ -91,7 +91,7 @@
     // Gentle image parallax
     $$('[data-par]').forEach(im => {
       const r = im.parentElement.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < vh) im.style.transform = `translate3d(0,${(r.top + r.height / 2 - vh / 2) * -.07}px,0)`;
+      if (r.bottom > 0 && r.top < vh) im.style.transform = `translate3d(0,${(r.top + r.height / 2 - vh / 2) * -(parseFloat(im.dataset.par) || .07)}px,0)`;
     });
 
     // Active nav link
