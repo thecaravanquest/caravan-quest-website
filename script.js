@@ -10,7 +10,7 @@
   }), { threshold: .15 });
   $$('.reveal').forEach(el => io.observe(el));
 
-  // Count-up stats
+  // Count-up numbers
   const cio = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     const el = e.target, end = +el.dataset.count, t0 = performance.now();
@@ -28,6 +28,59 @@
   const nav = $('#nav'), bar = $('#progress'), hero = $('.hero');
   const disc = $('#discoverWrap'), discO = $('#discoverOutline'), scene = $('#scene'), sceneFg = $('#sceneFg');
   const links = $$('.nav-links a'), secs = links.map(a => $(a.getAttribute('href')));
+
+  // ---- Intro: words light up as you scroll ----
+  const scrub = $('#scrub'), scrubText = $('#scrubText'), scrubNote = $('#scrubNote');
+  const words = scrubText.textContent.trim().split(/\s+/);
+  scrubText.innerHTML = words.map(w => `<span class="w">${w}</span>`).join(' ');
+  const wEls = $$('.w', scrubText);
+  const scrubUpdate = vh => {
+    const r = scrub.getBoundingClientRect();
+    if (r.top > vh || r.bottom < 0) return;
+    const f = clamp(-r.top / (scrub.offsetHeight - vh));
+    const k = f / .78 * wEls.length;
+    wEls.forEach((w, i) => w.classList.toggle('on', i < k));
+    scrubNote.classList.toggle('on', f > .86);
+  };
+
+  // ---- The Hunt: pinned night story ----
+  const hunt = $('#hunt'), hpanels = $$('.hpanel'), HN = hpanels.length;
+  const hstars = $('#hstars'), hmoon = $('#hmoon'), herd = $('#herd'), hnum = $('#hnum'), hbar = $('#hbar');
+  const storyLines = $$('.hstory p'), words3 = $$('.hplay .words span');
+  for (let k = 0; k < 130; k++) {
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', Math.round(Math.random() * 1600)); c.setAttribute('cy', Math.round(Math.random() * 640));
+    c.setAttribute('r', (Math.random() * 1.7 + .4).toFixed(1)); c.setAttribute('fill', '#fff');
+    c.setAttribute('opacity', (Math.random() * .7 + .25).toFixed(2));
+    hstars.appendChild(c);
+  }
+  let lastHunt = -1;
+  const huntUpdate = vh => {
+    const r = hunt.getBoundingClientRect();
+    if (r.top > vh || r.bottom < 0) return;
+    const f = clamp(-r.top / (hunt.offsetHeight - vh)), p = f * (HN - 1), cur = Math.round(p);
+    hpanels.forEach((el, i) => {
+      // the story panel holds until its three lines have appeared; the others hold briefly so they can be read
+      const d = i === 0 ? Math.max(0, p - .5) : p - i;
+      const o = clamp(1 - Math.max(0, Math.abs(d) - (i === 0 ? 0 : .12)) * 2.4);
+      el.style.opacity = o; el.style.visibility = o > .02 ? 'visible' : 'hidden';
+      el.style.transform = `translate3d(0,${d * -70}px,0)`;
+    });
+    const u = clamp(p / .4);
+    storyLines.forEach((l, k) => l.classList.toggle('on', u > .08 + k * .34));
+    const m = clamp(p / .95);
+    herd.style.transformOrigin = '50% 100%';
+    herd.style.transform = `translate3d(0,${-m * 12}vh,0) scale(${1 - m * .55})`;
+    herd.style.opacity = 1 - m * .9;
+    hstars.style.transform = `translate3d(0,${-p * 36}px,0)`;
+    hmoon.style.transform = `translate3d(0,${-p * 50}px,0)`;
+    words3.forEach((w, k) => w.classList.toggle('on', p - 2 > -.3 + k * .24));
+    if (cur !== lastHunt) {
+      lastHunt = cur;
+      hnum.textContent = '0' + (cur + 1) + ' / 0' + HN;
+      hbar.style.setProperty('--w', ((cur + 1) / HN * 100) + '%');
+    }
+  };
 
   // ---- The Route: pinned stage; each emirate's scene rises up as you scroll down ----
   const route = $('#route'), rscenes = $$('.rscene'), rtexts = $$('.rtext'), N = rtexts.length;
@@ -64,25 +117,6 @@
     }
   };
 
-  // ---- About: the pinned photo follows the statement you are reading ----
-  const abtSteps = $$('.abt-step'), abtImgs = $$('.abt-img'), abtCap = $('#abtCap'), abtIdx = $('#abtIdx'), abtBar = $('#abtBar');
-  let lastAbt = -1;
-  const aboutUpdate = vh => {
-    if (!abtSteps.length) return;
-    let cur = 0, best = 1e9;
-    abtSteps.forEach((s, i) => {
-      const r = s.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - vh * .5);
-      if (d < best) { best = d; cur = i; }
-      s.classList.toggle('on', r.top < vh * .62 && r.bottom > vh * .38);
-    });
-    if (cur === lastAbt) return;
-    lastAbt = cur;
-    abtImgs.forEach((im, i) => im.classList.toggle('on', i === cur));
-    abtCap.textContent = abtImgs[cur].dataset.cap;
-    abtIdx.textContent = '0' + (cur + 1) + ' / 0' + abtSteps.length;
-    abtBar.style.width = ((cur + 1) / abtSteps.length * 100) + '%';
-  };
-
   let ticking = false;
   const update = () => {
     ticking = false;
@@ -98,19 +132,15 @@
       disc.style.opacity = discO.style.opacity = 1 - p * .9;
     }
 
-    aboutUpdate(vh);
+    scrubUpdate(vh);
+    huntUpdate(vh);
     routeUpdate(vh);
 
-    // The Hunt: the block you are reading lights up
-    $$('.hblock').forEach(b => { const r = b.getBoundingClientRect(); b.classList.toggle('on', r.top < vh * .6 && r.bottom > vh * .4); });
-
-    // Gentle image parallax
     $$('[data-par]').forEach(im => {
       const r = im.parentElement.getBoundingClientRect();
       if (r.bottom > 0 && r.top < vh) im.style.transform = `translate3d(0,${(r.top + r.height / 2 - vh / 2) * -(parseFloat(im.dataset.par) || .07)}px,0)`;
     });
 
-    // Active nav link
     let cur = 0;
     secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < vh * .4) cur = i; });
     links.forEach((a, i) => a.classList.toggle('active', i === cur));
@@ -158,21 +188,25 @@
   });
 
   // Start the Hunt: filter the route by site type, then jump to the region or camel type chosen
+  const jumpTo = (sec, frac) => {
+    const top = sec.getBoundingClientRect().top + scrollY, span = sec.offsetHeight - innerHeight;
+    scrollTo({ top: top + span * frac, behavior: 'smooth' });
+  };
   $('#finder').addEventListener('submit', e => {
     e.preventDefault();
     const region = $('#fRegion').value, kind = $('#fType').value, species = $('#fLevel').value;
     $$('.sites li').forEach(li => li.classList.toggle('hide', !!kind && li.dataset.kind !== kind));
     $$('.species').forEach(s => s.classList.remove('pulse'));
-    let target = $('#route');
     if (region) {
       const i = rtexts.findIndex(t => t.dataset.region === region);
-      if (i >= 0) { const top = route.getBoundingClientRect().top + scrollY, span = route.offsetHeight - innerHeight; scrollTo({ top: top + span * (i / (N - 1)), behavior: 'smooth' }); return; }
+      if (i >= 0) return jumpTo(route, i / (N - 1));
     }
-    else if (species) {
+    if (species) {
       const card = $$('.species').find(s => s.dataset.species === species);
-      if (card) { card.classList.add('pulse'); target = card; }
+      if (card) card.classList.add('pulse');
+      return jumpTo(hunt, 1 / (HN - 1));
     }
-    target.scrollIntoView({ behavior: 'smooth', block: target.classList.contains('species') ? 'center' : 'start' });
+    jumpTo(route, 0);
   });
 
   // Signup: front end only for now
