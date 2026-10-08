@@ -153,92 +153,71 @@
   </article>
 </section>
 
-<!-- THE ROUTE: vertical, one chapter per emirate, theme changes with the place -->
-<section class="route" id="route">
-  <div class="route-head">
-    <p class="eyebrow reveal">The Route</p>
-    <h2 class="big small reveal">Seven Emirates.<br>One long caravan.</h2>
-    <p class="sec-note reveal">These are the candidate sites from our location plan. Final locations depend on landowner and authority approvals, and none are confirmed yet.</p>
-  </div>
-  <div class="route-wrap" id="routeWrap">
-    <div class="rail" aria-hidden="true">
-      <div class="rail-in">
-        <div class="rail-line"><i id="railFill"></i></div>
-        <div class="rail-dots" id="railDots"></div>
-        <img class="rail-camel" id="railCamel" src="img/logo-camel.png" alt="">
-        <span class="rail-name" id="railName">Abu Dhabi</span>
-      </div>
+<!-- THE ROUTE: pinned, scroll-driven. Each emirate's scene rises up as you scroll down. -->
+<section class="route" id="route" aria-label="The route across the Emirates">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <symbol id="palm" viewBox="0 0 200 300"><path d="M95 300C99 230 103 160 109 92L121 92C117 160 113 232 116 300Z"/><g transform="translate(115 92)"><path id="frond" d="M0 0C-30 -38 -75 -34 -110 12C-70 -12 -30 -10 0 8Z"/><use href="#frond" transform="rotate(48)"/><use href="#frond" transform="rotate(96)"/><use href="#frond" transform="rotate(144)"/><use href="#frond" transform="rotate(180) scale(1 -1)"/><use href="#frond" transform="rotate(-38)"/><use href="#frond" transform="rotate(218) scale(1 -1)"/></g></symbol>
+  </defs></svg>
+  <div class="rstage" id="rstage">
+    <div class="rscene" style="z-index:1"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="r1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4cf9a"/><stop offset=".6" stop-color="#f1b374"/><stop offset="1" stop-color="#d98b4e"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#r1)"/><circle cx="1250" cy="330" r="80" fill="#fff0cf" opacity=".9"/>
+<g class="lyr" data-d="1"><path fill="#c98a5a" opacity=".6" d="M0 640C300 590 520 620 820 600S1300 590 1600 620V900H0Z"/></g>
+<g class="lyr" data-d="2" fill="#7e4a2c"><rect x="640" y="560" width="320" height="170"/><rect x="610" y="500" width="64" height="230"/><rect x="926" y="520" width="64" height="210"/><path d="M610 500h12v-14h12v14h12v-14h12v14h16zM926 520h12v-14h12v14h12v-14h12v14h16z"/><path fill="#5a3320" d="M770 730v-70a30 30 0 0 1 60 0v70z"/></g>
+<g class="lyr" data-d="3" fill="#2f5a3a" opacity=".85"><use href="#palm" x="180" y="470" width="150" height="225"/><use href="#palm" x="1200" y="490" width="130" height="195"/><use href="#palm" x="1330" y="520" width="100" height="150"/></g>
+<g class="lyr" data-d="5"><path fill="#b9753d" d="M0 800C300 740 700 790 1000 800S1450 770 1600 800V900H0Z"/></g></svg></div>
+    <div class="rscene" style="z-index:2"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="r2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6c48c"/><stop offset=".55" stop-color="#e9a064"/><stop offset=".56" stop-color="#7a5a52"/><stop offset="1" stop-color="#3a2c30"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#r2)"/><circle cx="800" cy="440" r="90" fill="#ffe3b0" opacity=".85"/>
+<g class="lyr" data-d="1" fill="#a86a4a" opacity=".55"><path d="M0 500L220 440 420 490 640 430 860 485 1100 435 1340 490 1600 450V500Z"/></g>
+<g class="lyr" data-d="2" fill="#6c3f2f"><path d="M80 500V430h120v70zM230 500V410h90v90zM350 500V440h140v60zM520 500V420h100v80zM1000 500V430h130v70zM1160 500V410h110v90zM1300 500V440h160v60z"/><path d="M120 430v-50h22v50zM260 410v-60h20v60zM540 420v-56h22v56zM1040 430v-54h22v54zM1190 410v-62h20v62z"/><path fill="#f4b57e" d="M124 392h14v18h-14zM262 366h12v16h-12zM544 380h14v16h-14zM1044 388h14v16h-14zM1192 364h12v16h-12z" opacity=".7"/></g>
+<g class="lyr" data-d="3" stroke="#f6c48c" stroke-opacity=".35" stroke-width="3" fill="none"><path d="M0 560C300 548 500 572 800 560S1300 548 1600 560"/><path d="M0 640C260 626 520 652 800 640S1320 626 1600 640"/><path d="M0 730C300 716 560 742 800 730S1300 716 1600 730"/></g>
+<g class="lyr" data-d="5"><path fill="#2a1f22" d="M0 860C400 830 800 850 1200 840S1500 835 1600 850V900H0Z"/></g></svg></div>
+    <div class="rscene" style="z-index:3"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="r3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2f5f"/><stop offset=".5" stop-color="#c9606c"/><stop offset="1" stop-color="#f0a583"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#r3)"/><circle cx="280" cy="230" r="54" fill="#fff0d2"/>
+<g class="lyr" data-d="1" fill="#7a3f55" opacity=".7"><path d="M0 560V520h140v-30h120v30h160v-40h140v40h200v-30h160v30h140v-40h180v40h160v40Z"/></g>
+<g class="lyr" data-d="2" fill="#552836"><path d="M100 640V540h120v100zM260 640V520h120v120zM420 640V550h120v90zM1040 640V530h120v110zM1200 640V510h130v130zM1370 640V545h130v95z"/><path fill="#3a1a26" d="M130 640v-50a30 30 0 0 1 60 0v50zM290 640v-60a30 30 0 0 1 60 0v60zM450 640v-45a30 30 0 0 1 60 0v45zM1070 640v-55a30 30 0 0 1 60 0v55zM1230 640v-65a30 30 0 0 1 60 0v65zM1400 640v-50a30 30 0 0 1 60 0v50z"/></g>
+<g class="lyr" data-d="3"><rect y="640" width="1600" height="260" fill="#6b3a52" opacity=".85"/><g stroke="#f0a583" stroke-opacity=".3" stroke-width="3" fill="none"><path d="M0 700C300 688 520 712 800 700S1300 688 1600 700"/><path d="M0 780C300 766 560 792 800 780S1320 766 1600 780"/></g></g>
+<g class="lyr" data-d="4" fill="#2e1830" opacity=".9"><use href="#palm" x="1380" y="470" width="170" height="255"/><use href="#palm" x="40" y="500" width="140" height="210"/></g></svg></div>
+    <div class="rscene" style="z-index:4"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="r4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe9e3"/><stop offset=".5" stop-color="#f7f0da"/><stop offset=".51" stop-color="#6fc6c2"/><stop offset="1" stop-color="#2a8f94"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#r4)"/><circle cx="1180" cy="400" r="60" fill="#fffbe6"/>
+<g class="lyr" data-d="1" stroke="#fff" stroke-opacity=".4" stroke-width="3" fill="none"><path d="M0 470C300 458 520 482 800 470S1300 458 1600 470"/><path d="M0 560C260 546 520 572 800 560S1320 546 1600 560"/><path d="M0 650C300 636 560 662 800 650S1300 636 1600 650"/></g>
+<g class="lyr" data-d="3"><path fill="#ecd9a8" d="M0 720C300 690 700 710 1000 720S1450 700 1600 710V900H0Z"/></g>
+<g class="lyr" data-d="4" fill="#4d6b5a"><path d="M0 700h1600v10H0z" opacity=".5"/><path d="M0 680h1600v6H0z" opacity=".5"/><use href="#palm" x="1230" y="440" width="150" height="225"/><use href="#palm" x="1360" y="470" width="130" height="195"/></g>
+<g class="lyr" data-d="5"><path fill="#d9c28a" d="M0 820C400 790 900 830 1600 800V900H0Z"/></g></svg></div>
+    <div class="rscene" style="z-index:5"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="r5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef5d8"/><stop offset=".5" stop-color="#cfe4b8"/><stop offset=".51" stop-color="#76ad96"/><stop offset="1" stop-color="#3c7a6a"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#r5)"/><circle cx="420" cy="330" r="64" fill="#fffbe0" opacity=".9"/>
+<g class="lyr" data-d="1" fill="#8fb98a" opacity=".6"><path d="M0 460C200 420 360 450 560 440S980 420 1200 450 1500 430 1600 450V460Z"/></g>
+<g class="lyr" data-d="2" fill="#2f6a46"><ellipse cx="260" cy="470" rx="190" ry="60"/><ellipse cx="700" cy="478" rx="240" ry="56"/><ellipse cx="1180" cy="470" rx="210" ry="62"/><ellipse cx="1500" cy="480" rx="140" ry="48"/></g>
+<g class="lyr" data-d="3" fill="#1f4d34"><ellipse cx="420" cy="620" rx="260" ry="80"/><ellipse cx="1000" cy="640" rx="300" ry="84"/><g stroke="#1f4d34" stroke-width="5" fill="none"><path d="M360 640v60M400 650v70M440 640v62M980 660v60M1030 670v66M1080 660v60"/></g></g>
+<g class="lyr" data-d="4" stroke="#eef5d8" stroke-opacity=".3" stroke-width="3" fill="none"><path d="M0 700C300 688 560 712 800 700S1300 688 1600 700"/><path d="M0 790C300 776 560 802 800 790S1320 776 1600 790"/></g></svg></div>
+    <div class="rscene" style="z-index:6"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="r6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb7d8"/><stop offset=".6" stop-color="#e5eef2"/><stop offset="1" stop-color="#f4eadb"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#r6)"/><circle cx="1280" cy="250" r="64" fill="#fff" opacity=".8"/>
+<g class="lyr" data-d="1"><path fill="#b9a690" d="M0 600L160 470 300 560 470 400 640 540 800 430 980 560 1150 410 1330 540 1480 450 1600 520V900H0Z"/></g>
+<g class="lyr" data-d="2"><path fill="#8b7662" d="M0 690L120 570 280 650 450 510 620 660 800 530 960 670 1140 550 1300 660 1460 570 1600 650V900H0Z"/></g>
+<rect y="560" width="1600" height="200" fill="#f4eadb" opacity=".18"/>
+<g class="lyr" data-d="3"><path fill="#5d4a3a" d="M0 770L180 660 340 740 540 630 720 750 920 650 1100 760 1300 660 1480 750 1600 700V900H0Z"/></g>
+<g class="lyr" data-d="5"><path fill="#3a2d24" d="M0 850L200 780 380 840 600 790 820 860 1040 800 1260 860 1440 810 1600 850V900H0Z"/><path fill="#2a211b" d="M1100 860h400v40h-400z"/><path stroke="#2a211b" stroke-width="5" d="M1100 840h400M1120 840v22M1200 840v22M1280 840v22M1360 840v22M1440 840v22"/></g></svg></div>
+    <div class="rscene" style="z-index:7"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="r7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe6ea"/><stop offset=".55" stop-color="#f6efd6"/><stop offset=".56" stop-color="#47bcc8"/><stop offset="1" stop-color="#1a7f92"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#r7)"/><circle cx="1120" cy="400" r="58" fill="#fffbe4"/>
+<g class="lyr" data-d="1" stroke="#fff" stroke-opacity=".4" stroke-width="3" fill="none"><path d="M700 520C900 508 1100 532 1600 520"/><path d="M640 610C900 596 1180 622 1600 610"/><path d="M600 700C900 686 1200 712 1600 700"/></g>
+<g class="lyr" data-d="2"><path fill="#8a7a66" d="M0 380L120 330 240 400 380 360 520 450 660 500 700 560V900H0Z"/></g>
+<g class="lyr" data-d="3" fill="#5f4f40"><path d="M0 560L140 500 300 570 460 520 600 600 680 700V900H0Z"/><rect x="250" y="450" width="130" height="70"/><rect x="238" y="420" width="30" height="100"/><rect x="362" y="426" width="30" height="94"/><path d="M238 420h6v-8h6v8h6v-8h6v8h6zM362 426h6v-8h6v8h6v-8h6v8h6z"/></g>
+<g class="lyr" data-d="5"><path fill="#e0cfa2" d="M520 900C640 800 900 790 1600 820V900Z"/></g></svg></div>
+    <div class="rshade"></div>
+    <p class="rkicker">The Route · Seven Emirates · Illustrations of each landscape</p>
+    <div class="rrail" aria-hidden="true">
+      <div class="rline"><i id="rfill"></i></div>
+      <div class="rdots" id="rdots"></div>
+      <img class="rcamel" id="rcamel" src="img/logo-camel.png" alt="">
     </div>
-    <article class="chapter t1" id="ch-1" data-region="Abu Dhabi" style="--prev:var(--sand)">
-      <div class="ch-text">
-        <span class="ch-num">01</span>
-        <h3>Abu Dhabi</h3>
-        <p class="ch-lede">Heritage precincts, oasis walkways and mangrove promenades.</p>
-        <ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Qasr Al Hosn precinct</li><li data-kind="Heritage"><b>Heritage</b>Heritage Village and Corniche heritage areas</li><li data-kind="Heritage"><b>Heritage</b>Al Ain heritage zones: oasis and cultural corridors</li><li data-kind="Nature"><b>Nature</b>Al Hudayriyat Island outdoor zones</li><li data-kind="Nature"><b>Nature</b>Mangrove promenades and boardwalks</li></ul>
-        <span class="badge">Candidate sites · subject to approvals</span>
-      </div>
-      <figure class="slot reveal"><div class="slot-in"><img src="img/logo-camel.png" alt=""><span>Photo coming soon</span><b>Qasr Al Hosn precinct</b></div></figure>
-    </article>
-    <article class="chapter t2" id="ch-2" data-region="Dubai" style="--prev:#f3e6d2">
-      <div class="ch-text">
-        <span class="ch-num">02</span>
-        <h3>Dubai</h3>
-        <p class="ch-lede">A heritage waterfront in the city, and mountain outdoors beyond it.</p>
-        <ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Al Fahidi and Al Seef heritage waterfront corridor</li><li data-kind="Nature"><b>Nature</b>Hatta outdoor tourism areas</li><li data-kind="Nature"><b>Nature</b>Public nature parks and promenades</li></ul>
-        <span class="badge">Candidate sites · subject to approvals</span>
-      </div>
-      <figure class="slot reveal"><div class="slot-in"><img src="img/logo-camel.png" alt=""><span>Photo coming soon</span><b>Al Fahidi and Al Seef heritage waterfront corridor</b></div></figure>
-    </article>
-    <article class="chapter t3" id="ch-3" data-region="Sharjah" style="--prev:#f2dfc4">
-      <div class="ch-text">
-        <span class="ch-num">03</span>
-        <h3>Sharjah</h3>
-        <p class="ch-lede">Culture first: heritage areas and museum-adjacent public spaces.</p>
-        <ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Heart of Sharjah heritage areas</li><li data-kind="Heritage"><b>Heritage</b>Sharjah heritage corridors and museum-adjacent outdoor spaces</li><li data-kind="Nature"><b>Nature</b>Al Noor Island and lagoon-adjacent outdoor areas</li></ul>
-        <span class="badge">Candidate sites · subject to approvals</span>
-      </div>
-      <figure class="slot reveal"><div class="slot-in"><img src="img/logo-camel.png" alt=""><span>Photo coming soon</span><b>Heart of Sharjah heritage areas</b></div></figure>
-    </article>
-    <article class="chapter t4" id="ch-4" data-region="Ajman" style="--prev:#f0dcd5">
-      <div class="ch-text">
-        <span class="ch-num">04</span>
-        <h3>Ajman</h3>
-        <p class="ch-lede">Coastline and heritage-linked public spaces with family footfall.</p>
-        <ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Ajman waterfront and heritage-linked public spaces</li><li data-kind="Nature"><b>Nature</b>Public beaches and promenades</li><li data-kind="Nature"><b>Nature</b>Managed outdoor recreation corridors and parks</li></ul>
-        <span class="badge">Candidate sites · subject to approvals</span>
-      </div>
-      <figure class="slot reveal"><div class="slot-in"><img src="img/logo-camel.png" alt=""><span>Photo coming soon</span><b>Ajman waterfront and heritage-linked public spaces</b></div></figure>
-    </article>
-    <article class="chapter t5" id="ch-5" data-region="Umm Al Quwain" style="--prev:#dcebe6">
-      <div class="ch-text">
-        <span class="ch-num">05</span>
-        <h3>Umm Al Quwain</h3>
-        <p class="ch-lede">Mangroves, lagoons and coastal nature with guided access.</p>
-        <ul class="sites"><li data-kind="Nature"><b>Nature</b>Mangrove and nature reserve-adjacent visitor areas</li><li data-kind="Nature"><b>Nature</b>Lagoon and coastal nature corridors</li><li data-kind="Heritage"><b>Heritage</b>Fort and heritage-adjacent public spaces</li></ul>
-        <span class="badge">Candidate sites · subject to approvals</span>
-      </div>
-      <figure class="slot reveal"><div class="slot-in"><img src="img/logo-camel.png" alt=""><span>Photo coming soon</span><b>Mangrove and nature reserve-adjacent visitor areas</b></div></figure>
-    </article>
-    <article class="chapter t6" id="ch-6" data-region="Ras Al Khaimah" style="--prev:#dfead8">
-      <div class="ch-text">
-        <span class="ch-num">06</span>
-        <h3>Ras Al Khaimah</h3>
-        <p class="ch-lede">Mountain viewpoints and cultural zones with outdoor access.</p>
-        <ul class="sites"><li data-kind="Nature"><b>Nature</b>Jebel Jais tourism corridors and viewpoint areas</li><li data-kind="Heritage"><b>Heritage</b>Heritage village and cultural zones</li></ul>
-        <span class="badge">Candidate sites · subject to approvals</span>
-      </div>
-      <figure class="slot reveal"><div class="slot-in"><img src="img/logo-camel.png" alt=""><span>Photo coming soon</span><b>Jebel Jais tourism corridors and viewpoint areas</b></div></figure>
-    </article>
-    <article class="chapter t7" id="ch-7" data-region="Fujairah" style="--prev:#dde5ec">
-      <div class="ch-text">
-        <span class="ch-num">07</span>
-        <h3>Fujairah</h3>
-        <p class="ch-lede">Forts and heritage corridors, a coastal promenade, and wadi trailheads.</p>
-        <ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Fort-adjacent public spaces and heritage corridors</li><li data-kind="Nature"><b>Nature</b>Coastal promenade environments</li><li data-kind="Nature"><b>Nature</b>Wadi and trailhead visitor nodes</li></ul>
-        <span class="badge">Candidate sites · subject to approvals</span>
-      </div>
-      <figure class="slot reveal"><div class="slot-in"><img src="img/logo-camel.png" alt=""><span>Photo coming soon</span><b>Fort-adjacent public spaces and heritage corridors</b></div></figure>
-    </article>
+    <div class="rtexts" id="rtexts">
+      <div class="rtext" data-region="Abu Dhabi" data-color="#b4682f"><div class="rnum">01</div><h3>Abu Dhabi</h3><p class="rlede">Heritage precincts, oasis walkways and mangrove promenades.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Qasr Al Hosn precinct</li><li data-kind="Heritage"><b>Heritage</b>Heritage Village and Corniche heritage areas</li><li data-kind="Heritage"><b>Heritage</b>Al Ain heritage zones: oasis and cultural corridors</li><li data-kind="Nature"><b>Nature</b>Al Hudayriyat Island outdoor zones</li><li data-kind="Nature"><b>Nature</b>Mangrove promenades and boardwalks</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
+      <div class="rtext" data-region="Dubai" data-color="#d68a2e"><div class="rnum">02</div><h3>Dubai</h3><p class="rlede">A heritage waterfront in the city, and mountain outdoors beyond it.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Al Fahidi and Al Seef heritage waterfront corridor</li><li data-kind="Nature"><b>Nature</b>Hatta outdoor tourism areas</li><li data-kind="Nature"><b>Nature</b>Public nature parks and promenades</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
+      <div class="rtext" data-region="Sharjah" data-color="#d2685f"><div class="rnum">03</div><h3>Sharjah</h3><p class="rlede">Culture first: heritage areas and museum-adjacent public spaces.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Heart of Sharjah heritage areas</li><li data-kind="Heritage"><b>Heritage</b>Heritage corridors and museum-adjacent outdoor spaces</li><li data-kind="Nature"><b>Nature</b>Al Noor Island and lagoon-adjacent outdoor areas</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
+      <div class="rtext" data-region="Ajman" data-color="#3fb3ad"><div class="rnum">04</div><h3>Ajman</h3><p class="rlede">Coastline and heritage-linked public spaces with family footfall.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Ajman waterfront and heritage-linked public spaces</li><li data-kind="Nature"><b>Nature</b>Public beaches and promenades</li><li data-kind="Nature"><b>Nature</b>Managed outdoor recreation corridors and parks</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
+      <div class="rtext" data-region="Umm Al Quwain" data-color="#6fb36e"><div class="rnum">05</div><h3>Umm Al Quwain</h3><p class="rlede">Mangroves, lagoons and coastal nature with guided access.</p><ul class="sites"><li data-kind="Nature"><b>Nature</b>Mangrove and nature reserve-adjacent visitor areas</li><li data-kind="Nature"><b>Nature</b>Lagoon and coastal nature corridors</li><li data-kind="Heritage"><b>Heritage</b>Fort and heritage-adjacent public spaces</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
+      <div class="rtext" data-region="Ras Al Khaimah" data-color="#e0a070"><div class="rnum">06</div><h3>Ras Al Khaimah</h3><p class="rlede">Mountain viewpoints and cultural zones with outdoor access.</p><ul class="sites"><li data-kind="Nature"><b>Nature</b>Jebel Jais tourism corridors and viewpoint areas</li><li data-kind="Heritage"><b>Heritage</b>Heritage village and cultural zones</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
+      <div class="rtext" data-region="Fujairah" data-color="#3cc0cc"><div class="rnum">07</div><h3>Fujairah</h3><p class="rlede">Forts and heritage corridors, a coastal promenade, and wadi trailheads.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Fort-adjacent public spaces and heritage corridors</li><li data-kind="Nature"><b>Nature</b>Coastal promenade environments</li><li data-kind="Nature"><b>Nature</b>Wadi and trailhead visitor nodes</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
+    </div>
   </div>
 </section>
 

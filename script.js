@@ -30,33 +30,38 @@
   const lines = $$('#bigStatement span');
   const links = $$('.nav-links a'), secs = links.map(a => $(a.getAttribute('href')));
 
-  // ---- The Route: vertical rail with a camel that travels down as you scroll ----
-  const wrap = $('#routeWrap'), chapters = $$('.chapter'), N = chapters.length;
-  const railFill = $('#railFill'), railCamel = $('#railCamel'), railName = $('#railName'), railDots = $('#railDots');
-  const dotEls = chapters.map((c, i) => {
-    const s = document.createElement('span'); s.style.top = ((i + .5) / N * 100) + '%';
-    railDots.appendChild(s); return s;
+  // ---- The Route: pinned stage; each emirate's scene rises up as you scroll down ----
+  const route = $('#route'), rscenes = $$('.rscene'), rtexts = $$('.rtext'), N = rtexts.length;
+  const rfill = $('#rfill'), rcamel = $('#rcamel'), rdots = $('#rdots'), rstage = $('#rstage');
+  const dotEls = rtexts.map((t, i) => {
+    const s = document.createElement('span'); s.style.top = (i / (N - 1) * 100) + '%';
+    rdots.appendChild(s); return s;
   });
   let lastCh = -1;
   const routeUpdate = vh => {
-    const wr = wrap.getBoundingClientRect();
-    if (wr.top > vh || wr.bottom < 0) { document.documentElement.style.removeProperty('--prog'); lastCh = -1; return; }
-    const mid = vh * .5;
-    let cur = 0;
-    chapters.forEach((c, i) => { if (c.getBoundingClientRect().top <= mid) cur = i; });
-    const r = chapters[cur].getBoundingClientRect();
-    const frac = clamp((mid - r.top) / r.height);
-    const pos = clamp((cur + frac) / N, .5 / N, 1 - .5 / N);
-    railFill.style.height = (pos * 100) + '%';
-    railCamel.style.top = (pos * 100) + '%';
-    railName.style.top = (pos * 100) + '%';
-    dotEls.forEach((d, i) => d.classList.toggle('done', (i + .5) / N <= pos));
+    const r = route.getBoundingClientRect();
+    if (r.top > vh || r.bottom < 0) { if (lastCh !== -2) { document.documentElement.style.removeProperty('--prog'); lastCh = -2; } return; }
+    const f = clamp(-r.top / (route.offsetHeight - vh));
+    const p = f * (N - 1), cur = Math.round(p);
+    rscenes.forEach((sc, i) => {
+      const t = i === 0 ? 0 : (1 - clamp(p - (i - 1))) * 100;
+      sc.style.transform = `translate3d(0,${t}%,0)`;
+      sc.style.visibility = t >= 100 ? 'hidden' : 'visible';
+      $$('.lyr', sc).forEach(l => { l.style.transform = `translate3d(0,${(i - p) * (+l.dataset.d) * 26}px,0)`; });
+    });
+    rtexts.forEach((t, i) => {
+      const dd = p - i, o = clamp(1 - Math.abs(dd) * 2.2);
+      t.style.opacity = o; t.style.visibility = o > .02 ? 'visible' : 'hidden';
+      t.style.transform = `translate3d(0,${dd * -70}px,0)`;
+    });
+    rfill.style.height = (f * 100) + '%';
+    rcamel.style.top = (f * 100) + '%';
+    dotEls.forEach((d, i) => d.classList.toggle('done', i <= p + .02));
     if (cur !== lastCh) {
       lastCh = cur;
-      railName.textContent = chapters[cur].dataset.region;
-      const ac = getComputedStyle(chapters[cur]).getPropertyValue('--ac').trim();
+      const ac = rtexts[cur].dataset.color;
+      rstage.style.setProperty('--ac', ac);
       document.documentElement.style.setProperty('--prog', ac);
-      $('.rail-in').style.setProperty('--ac', ac);
     }
   };
 
@@ -79,6 +84,9 @@
     lines.forEach(l => l.classList.toggle('lit', l.getBoundingClientRect().top < vh * .68));
 
     routeUpdate(vh);
+
+    // The Hunt: the block you are reading lights up
+    $$('.hblock').forEach(b => { const r = b.getBoundingClientRect(); b.classList.toggle('on', r.top < vh * .6 && r.bottom > vh * .4); });
 
     // Gentle image parallax
     $$('[data-par]').forEach(im => {
@@ -140,7 +148,10 @@
     $$('.sites li').forEach(li => li.classList.toggle('hide', !!kind && li.dataset.kind !== kind));
     $$('.species').forEach(s => s.classList.remove('pulse'));
     let target = $('#route');
-    if (region) target = chapters.find(c => c.dataset.region === region) || target;
+    if (region) {
+      const i = rtexts.findIndex(t => t.dataset.region === region);
+      if (i >= 0) { const top = route.getBoundingClientRect().top + scrollY, span = route.offsetHeight - innerHeight; scrollTo({ top: top + span * (i / (N - 1)), behavior: 'smooth' }); return; }
+    }
     else if (species) {
       const card = $$('.species').find(s => s.dataset.species === species);
       if (card) { card.classList.add('pulse'); target = card; }
