@@ -24,83 +24,41 @@
   }), { threshold: .6 });
   $$('[data-count]').forEach(el => cio.observe(el));
 
-  // Scroll-driven scene
-  const nav = $('#nav'), bar = $('#progress'), hero = $('.hero'), disc = $('#discoverWrap'), discO = $('#discoverOutline'), scene = $('#scene'), sceneFg = $('#sceneFg');
+  // ---- Elements ----
+  const nav = $('#nav'), bar = $('#progress'), hero = $('.hero');
+  const disc = $('#discoverWrap'), discO = $('#discoverOutline'), scene = $('#scene'), sceneFg = $('#sceneFg');
   const lines = $$('#bigStatement span');
-  const quest = $('#quest'), track = $('#questTrack'), qfill = $('#qfill'), qnum = $('#qnum'), qsteps = $$('.step', track), qticks = $$('.qticks li');
   const links = $$('.nav-links a'), secs = links.map(a => $(a.getAttribute('href')));
 
-  // ---- JOURNEY ----
-  const CH = [
-    { stop: 'Dubai', region: 'Dubai', title: 'Where the quest begins', color: '#e08a45', type: 'Sculpture Hunt', level: 'Easy', copy: 'Steel towers on one side, open dunes on the other. The first camel hides where the city meets the sand.' },
-    { stop: 'Al Ain', region: 'Al Ain', title: 'Green in the gold', color: '#8cc084', type: 'Desert Trail', level: 'Moderate', copy: 'Follow the water channels into the palm shade. Cool air, old stone and a camel waiting between the trees.' },
-    { stop: 'Ras Al Khaimah', region: 'Ras Al Khaimah', title: 'Above the clouds', color: '#9fc0dc', type: 'Coast & Mountains', level: 'Hard', copy: 'The road climbs into rock and mist. Up here the camel watches over the whole valley.' },
-    { stop: 'Sharjah', region: 'Sharjah', title: 'Stories in stone', color: '#f0a36b', type: 'Heritage Walk', level: 'Easy', copy: 'Lantern light, coral-stone walls and narrow lanes. Every corner has a story, and one has a camel.' },
-    { stop: 'Fujairah', region: 'Fujairah', title: 'Where mountains meet the sea', color: '#4cc1c9', type: 'Coast & Mountains', level: 'Moderate', copy: 'Turn east to the coast. Salt wind, cliff paths and a camel looking out at the water.' },
-    { stop: 'Home', region: '', title: 'The last camel', color: '#f2cf8a', type: '', level: '', copy: 'You have walked the whole caravan. The stars come out, and the next journey is yours.' }
-  ];
-  const N = CH.length;
-  const jsec = $('#journey'), jstage = $('#jstage'), jscenes = $$('.jscene'), jtexts = $('#jtexts'), jdots = $('#jdots'), jstops = $('#jstops');
-  const jfill = $('#jfill'), jcamel = $('#jcamel');
-  const stars = $('#stars');
-  for (let k = 0; k < 110; k++) {
-    const s = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    s.setAttribute('cx', Math.round(Math.random() * 1600)); s.setAttribute('cy', Math.round(Math.random() * 560));
-    s.setAttribute('r', (Math.random() * 1.8 + .4).toFixed(1)); s.setAttribute('opacity', (Math.random() * .7 + .3).toFixed(2));
-    stars.appendChild(s);
-  }
-  const jt = CH.map((ch, i) => {
-    const d = document.createElement('div'); d.className = 'jtext';
-    d.innerHTML = `<div class="jnum">0${i + 1}</div><p class="eyebrow">${ch.region || 'The finale'}</p><h3>${ch.title}</h3><p>${ch.copy}</p>` +
-      (ch.type ? `<div class="jtags"><b>${ch.type.replace('&', '&amp;')}</b><b>${ch.level}</b></div><a href="#destinations" data-region="${ch.region}">See ${ch.region} quests <span>→</span></a>`
-               : `<div class="jtags"></div><a href="#join">Join the Journey <span>→</span></a>`);
-    jtexts.appendChild(d); return d;
-  });
-  const dots = CH.map((ch, i) => {
-    const li = document.createElement('li'); li.title = ch.stop; li.addEventListener('click', () => goChapter(i));
-    jdots.appendChild(li); return li;
-  });
-  const stops = CH.map((ch, i) => {
-    const s = document.createElement('div'); s.className = 'jstop'; s.style.left = (i / (N - 1) * 100) + '%'; s.textContent = ch.stop;
-    jstops.appendChild(s); return s;
-  });
-  const goChapter = i => {
-    const top = jsec.getBoundingClientRect().top + scrollY, span = jsec.offsetHeight - innerHeight;
-    scrollTo({ top: top + span * (i / (N - 1)), behavior: 'smooth' });
-  };
-  jtexts.addEventListener('click', e => {
-    const a = e.target.closest('a[data-region]'); if (!a) return;
-    e.preventDefault();
-    const sel = $('#fRegion'); sel.value = a.dataset.region; sel.dispatchEvent(new Event('change', { bubbles: true }));
-    $('#finder').requestSubmit();
+  // ---- The Route: vertical rail with a camel that travels down as you scroll ----
+  const wrap = $('#routeWrap'), chapters = $$('.chapter'), N = chapters.length;
+  const railFill = $('#railFill'), railCamel = $('#railCamel'), railName = $('#railName'), railDots = $('#railDots');
+  const dotEls = chapters.map((c, i) => {
+    const s = document.createElement('span'); s.style.top = ((i + .5) / N * 100) + '%';
+    railDots.appendChild(s); return s;
   });
   let lastCh = -1;
-  const journeyUpdate = vh => {
-    const r = jsec.getBoundingClientRect();
-    const inView = r.top < vh && r.bottom > 0;
-    if (!inView) { if (lastCh !== -2) { document.documentElement.style.removeProperty('--prog'); lastCh = -2; } return; }
-    const f = clamp(-r.top / (jsec.offsetHeight - vh));
-    const p = f * (N - 1), cur = Math.round(p);
-    jscenes.forEach((sc, i) => {
-      sc.style.opacity = i === 0 ? 1 : clamp(p - (i - 1));
-      $$('.lyr', sc).forEach(l => { l.style.transform = `translate3d(${(p - i) * -(+l.dataset.d) * 38}px,0,0)`; });
-    });
-    jt.forEach((t, i) => {
-      const dd = p - i, o = clamp(1 - Math.abs(dd) * 2.4);
-      t.style.opacity = o; t.style.visibility = o > .02 ? 'visible' : 'hidden';
-      t.style.transform = `translate3d(0,${dd * -40}px,0)`; t.style.pointerEvents = i === cur ? 'auto' : 'none';
-    });
-    jfill.style.width = (f * 100) + '%';
-    jcamel.style.left = (f * 100) + '%';
-    jcamel.style.transform = `translateX(-50%) translateY(${Math.sin(f * N * 28) * -2}px)`;
-    stops.forEach((s, i) => { s.classList.toggle('done', i < cur); s.classList.toggle('on', i === cur); });
-    dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+  const routeUpdate = vh => {
+    const wr = wrap.getBoundingClientRect();
+    if (wr.top > vh || wr.bottom < 0) { document.documentElement.style.removeProperty('--prog'); lastCh = -1; return; }
+    const mid = vh * .5;
+    let cur = 0;
+    chapters.forEach((c, i) => { if (c.getBoundingClientRect().top <= mid) cur = i; });
+    const r = chapters[cur].getBoundingClientRect();
+    const frac = clamp((mid - r.top) / r.height);
+    const pos = clamp((cur + frac) / N, .5 / N, 1 - .5 / N);
+    railFill.style.height = (pos * 100) + '%';
+    railCamel.style.top = (pos * 100) + '%';
+    railName.style.top = (pos * 100) + '%';
+    dotEls.forEach((d, i) => d.classList.toggle('done', (i + .5) / N <= pos));
     if (cur !== lastCh) {
-      lastCh = cur; jstage.style.setProperty('--accent', CH[cur].color);
-      document.documentElement.style.setProperty('--prog', CH[cur].color);
+      lastCh = cur;
+      railName.textContent = chapters[cur].dataset.region;
+      const ac = getComputedStyle(chapters[cur]).getPropertyValue('--ac').trim();
+      document.documentElement.style.setProperty('--prog', ac);
+      $('.rail-in').style.setProperty('--ac', ac);
     }
   };
-  // ---- END JOURNEY ----
 
   let ticking = false;
   const update = () => {
@@ -120,21 +78,13 @@
     // Statement lines light up one by one
     lines.forEach(l => l.classList.toggle('lit', l.getBoundingClientRect().top < vh * .68));
 
-    // Pinned quest: scroll moves the cards sideways and walks the camel along the trail
-    const qr = quest.getBoundingClientRect();
-    const qp = clamp(-qr.top / (quest.offsetHeight - vh));
-    const maxX = Math.max(0, track.scrollWidth - innerWidth * .9);
-    track.style.transform = `translate3d(${-qp * maxX}px,0,0)`;
-    qfill.style.width = (qp * 100) + '%';
-    const qi = Math.round(qp * (qsteps.length - 1));
-    qsteps.forEach((s, i) => s.classList.toggle('on', i === qi));
-    qticks.forEach((t, i) => t.classList.toggle('on', i <= qi));
-    qnum.textContent = '0' + (qi + 1);
-
-    journeyUpdate(vh);
+    routeUpdate(vh);
 
     // Gentle image parallax
-    $$('[data-par]').forEach(im => { const r = im.parentElement.getBoundingClientRect(); if (r.bottom > 0 && r.top < vh) im.style.transform = `translate3d(0,${(r.top + r.height / 2 - vh / 2) * -.07}px,0)`; });
+    $$('[data-par]').forEach(im => {
+      const r = im.parentElement.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < vh) im.style.transform = `translate3d(0,${(r.top + r.height / 2 - vh / 2) * -.07}px,0)`;
+    });
 
     // Active nav link
     let cur = 0;
@@ -146,11 +96,10 @@
   addEventListener('resize', onScroll);
   update();
 
-
   // Glass dropdowns: replace native select lists (browsers can't style them)
   $$('.finder select').forEach(sel => {
-    const wrap = document.createElement('div'); wrap.className = 'dd';
-    sel.parentNode.insertBefore(wrap, sel); wrap.appendChild(sel);
+    const wrapEl = document.createElement('div'); wrapEl.className = 'dd';
+    sel.parentNode.insertBefore(wrapEl, sel); wrapEl.appendChild(sel);
     const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'dd-btn';
     btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
     const list = document.createElement('ul'); list.className = 'dd-list'; list.setAttribute('role', 'listbox'); list.tabIndex = -1;
@@ -158,39 +107,45 @@
       const li = document.createElement('li'); li.textContent = o.textContent; li.setAttribute('role', 'option'); li.dataset.i = i;
       list.appendChild(li); return li;
     });
-    wrap.append(btn, list);
+    wrapEl.append(btn, list);
     let act = sel.selectedIndex;
     const paint = () => {
       btn.textContent = sel.options[sel.selectedIndex].textContent;
       items.forEach((li, i) => { li.setAttribute('aria-selected', i === sel.selectedIndex); li.classList.toggle('act', i === act); });
     };
-    const open = v => { wrap.classList.toggle('open', v); btn.setAttribute('aria-expanded', v); if (v) { $$('.dd.open').forEach(d => d !== wrap && d.classList.remove('open')); act = sel.selectedIndex; paint(); } };
+    const open = v => {
+      wrapEl.classList.toggle('open', v); btn.setAttribute('aria-expanded', v);
+      if (v) { $$('.dd.open').forEach(d => d !== wrapEl && d.classList.remove('open')); act = sel.selectedIndex; paint(); }
+    };
     const pick = i => { sel.selectedIndex = i; sel.dispatchEvent(new Event('change', { bubbles: true })); open(false); paint(); btn.focus(); };
-    btn.addEventListener('click', () => open(!wrap.classList.contains('open')));
+    btn.addEventListener('click', () => open(!wrapEl.classList.contains('open')));
     list.addEventListener('click', e => { const li = e.target.closest('li'); if (li) pick(+li.dataset.i); });
     btn.addEventListener('keydown', e => {
-      const isOpen = wrap.classList.contains('open');
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (!isOpen) return open(true); act = clamp(act + (e.key === 'ArrowDown' ? 1 : -1), 0, items.length - 1); paint(); }
-      else if ((e.key === 'Enter' || e.key === ' ') && isOpen) { e.preventDefault(); pick(act); }
+      const isOpen = wrapEl.classList.contains('open');
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault(); if (!isOpen) return open(true);
+        act = clamp(act + (e.key === 'ArrowDown' ? 1 : -1), 0, items.length - 1); paint();
+      } else if ((e.key === 'Enter' || e.key === ' ') && isOpen) { e.preventDefault(); pick(act); }
       else if (e.key === 'Escape') open(false);
     });
-    document.addEventListener('click', e => { if (!wrap.contains(e.target)) open(false); });
+    document.addEventListener('click', e => { if (!wrapEl.contains(e.target)) open(false); });
     sel.addEventListener('change', () => { act = sel.selectedIndex; paint(); });
     paint();
   });
 
-  // Quest finder filters the destination cards
+  // Start the Hunt: filter the route by site type, then jump to the region or camel type chosen
   $('#finder').addEventListener('submit', e => {
     e.preventDefault();
-    const f = { region: $('#fRegion').value, type: $('#fType').value, level: $('#fLevel').value };
-    let shown = 0;
-    $$('.card').forEach(c => {
-      const ok = (!f.region || c.dataset.region === f.region) && (!f.type || c.dataset.type === f.type) && (!f.level || c.dataset.level === f.level);
-      c.classList.toggle('hide', !ok);
-      if (ok) shown++;
-    });
-    $('#empty').hidden = shown > 0;
-    $('#destinations').scrollIntoView({ behavior: 'smooth' });
+    const region = $('#fRegion').value, kind = $('#fType').value, species = $('#fLevel').value;
+    $$('.sites li').forEach(li => li.classList.toggle('hide', !!kind && li.dataset.kind !== kind));
+    $$('.species').forEach(s => s.classList.remove('pulse'));
+    let target = $('#route');
+    if (region) target = chapters.find(c => c.dataset.region === region) || target;
+    else if (species) {
+      const card = $$('.species').find(s => s.dataset.species === species);
+      if (card) { card.classList.add('pulse'); target = card; }
+    }
+    target.scrollIntoView({ behavior: 'smooth', block: target.classList.contains('species') ? 'center' : 'start' });
   });
 
   // Signup: front end only for now
