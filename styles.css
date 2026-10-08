@@ -107,8 +107,11 @@ section:not(.hero){position:relative;padding:14vh 5vw}
 .rscene{position:absolute;inset:0;will-change:transform;box-shadow:0 -50px 90px rgba(0,0,0,.45)}
 .rscene:first-child{box-shadow:none}
 .rscene svg{position:absolute;inset:0;width:100%;height:100%}
+.rphoto{position:absolute;left:0;top:-8%;width:100%;height:116%;object-fit:cover;will-change:transform}
+.rcredit{position:absolute;z-index:36;right:3vw;bottom:2.4vh;font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.7);max-width:46vw;text-align:right}
+.rcredit:hover{color:#fff;text-decoration:underline}
 .rscene .lyr{will-change:transform}
-.rshade{position:absolute;inset:0;z-index:30;pointer-events:none;background:linear-gradient(90deg,rgba(14,8,3,.78),rgba(14,8,3,.25) 58%,rgba(14,8,3,0)),linear-gradient(0deg,rgba(14,8,3,.82),rgba(14,8,3,0) 52%)}
+.rshade{position:absolute;inset:0;z-index:30;pointer-events:none;background:linear-gradient(90deg,rgba(14,8,3,.82),rgba(14,8,3,.34) 60%,rgba(14,8,3,.05)),linear-gradient(0deg,rgba(14,8,3,.88),rgba(14,8,3,0) 58%)}
 .rkicker{position:absolute;z-index:32;left:9vw;top:15vh;font-size:12px;letter-spacing:.26em;text-transform:uppercase;opacity:.85}
 .rrail{position:absolute;z-index:33;left:3.6vw;top:20vh;bottom:14vh;width:60px}
 .rline{position:absolute;left:5px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.28);border-radius:2px}
@@ -221,3 +224,10 @@ footer nav a:hover,footer>a:hover{color:var(--clay)}
   .rtexts{left:12vw;width:82vw;bottom:8vh;height:62vh}
   .sites li:nth-child(n+4){display:none}
 }
+
+.rcredit{z-index:36}
+.photo-credits{flex-basis:100%;font-size:12px;opacity:.75}
+.photo-credits summary{cursor:pointer;letter-spacing:.08em;text-transform:uppercase}
+.photo-credits ul{list-style:none;margin-top:12px;display:grid;gap:6px;line-height:1.5}
+.photo-credits a{border-bottom:1px solid currentColor}
+@media (max-width:900px){.rcredit{right:4vw;max-width:70vw;font-size:10px}}
