@@ -68,6 +68,7 @@
   const abtSteps = $$('.abt-step'), abtImgs = $$('.abt-img'), abtCap = $('#abtCap'), abtIdx = $('#abtIdx'), abtBar = $('#abtBar');
   let lastAbt = -1;
   const aboutUpdate = vh => {
+    if (!abtSteps.length) return;
     let cur = 0, best = 1e9;
     abtSteps.forEach((s, i) => {
       const r = s.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - vh * .5);
