@@ -27,7 +27,7 @@
   // Scroll-driven scene
   const nav = $('#nav'), bar = $('#progress'), hero = $('.hero'), disc = $('#discoverWrap'), discO = $('#discoverOutline'), scene = $('#scene'), sceneFg = $('#sceneFg');
   const lines = $$('#bigStatement span');
-  const quest = $('#quest'), track = $('#questTrack'), tcamel = $('#trailCamel');
+  const quest = $('#quest'), track = $('#questTrack'), qfill = $('#qfill'), qnum = $('#qnum'), qsteps = $$('.step', track), qticks = $$('.qticks li');
   const links = $$('.nav-links a'), secs = links.map(a => $(a.getAttribute('href')));
 
   // ---- JOURNEY ----
@@ -125,7 +125,11 @@
     const qp = clamp(-qr.top / (quest.offsetHeight - vh));
     const maxX = Math.max(0, track.scrollWidth - innerWidth * .9);
     track.style.transform = `translate3d(${-qp * maxX}px,0,0)`;
-    tcamel.style.left = `calc(${qp * 100}% - ${qp * 84}px)`;
+    qfill.style.width = (qp * 100) + '%';
+    const qi = Math.round(qp * (qsteps.length - 1));
+    qsteps.forEach((s, i) => s.classList.toggle('on', i === qi));
+    qticks.forEach((t, i) => t.classList.toggle('on', i <= qi));
+    qnum.textContent = '0' + (qi + 1);
 
     journeyUpdate(vh);
 

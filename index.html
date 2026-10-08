@@ -219,8 +219,12 @@
       <p class="eyebrow">The Quest</p>
       <h2 class="big small">How the hunt works</h2>
     </div>
-    <div class="trail"><svg viewBox="0 0 1000 40" preserveAspectRatio="none"><path d="M0 20 Q 125 0 250 20 T 500 20 T 750 20 T 1000 20" fill="none" stroke="currentColor" stroke-dasharray="6 8" stroke-width="2"/></svg><img class="trail-camel" id="trailCamel" src="img/logo-camel.png" alt=""></div>
-    <div class="quest-track" id="questTrack">
+    <div class="qprog" aria-hidden="true">
+      <div class="qbar"><i id="qfill"></i></div>
+      <ol class="qticks"><li>Clue</li><li>Trail</li><li>Camel</li><li>Story</li></ol>
+      <div class="qcount"><b id="qnum">01</b><span>/ 04</span></div>
+    </div>
+        <div class="quest-track" id="questTrack">
       <article class="step"><img src="img/c-sunset.jpg" alt="" loading="lazy"><div><span>01</span><h3>Read the clue</h3><p>Each quest opens with a riddle about a place and its story.</p></div></article>
       <article class="step"><img src="img/c-dunes.jpg" alt="" loading="lazy"><div><span>02</span><h3>Follow the trail</h3><p>Drive, hike or wander. Routes run from city streets to open dunes.</p></div></article>
       <article class="step"><img src="img/c-camel.jpg" alt="" loading="lazy"><div><span>03</span><h3>Find the camel</h3><p>Stand beside the sculpture. Snap the proof. Unlock its story.</p></div></article>
