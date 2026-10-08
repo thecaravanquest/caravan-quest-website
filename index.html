@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Caravan Quest — Find the Camels. Explore the Real UAE.</title>
+<meta name="description" content="A one-of-a-kind adventure to discover hidden camel sculptures, untold stories and extraordinary places beyond the tourist trail.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="nav" id="nav">
+  <nav class="nav-links">
+    <a href="#home" class="active">Home</a>
+    <a href="#about">About</a>
+    <a href="#journey">Journey</a>
+    <a href="#quest">The Quest</a>
+    <a href="#destinations">Destinations</a>
+    <a href="#blog">Blog</a>
+  </nav>
+  <a href="#home" class="logo" aria-label="Caravan Quest">
+    <img src="img/logo-camel.png" class="logo-camel" alt="">
+    <span>Caravan Quest</span>
+  </a>
+  <div class="nav-right">
+    <a href="https://www.instagram.com/thecaravanquest/" aria-label="Instagram" class="icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+    </a>
+    <a href="#destinations" aria-label="Map" class="icon">
+      <svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.500 7 12 7 12z" fill="currentColor"/><circle cx="12" cy="10" r="2.500" fill="#0003"/></svg>
+    </a>
+    <a href="#join" class="btn-ghost">Join the Journey</a>
+  </div>
+</header>
+
+<!-- Shared camel silhouette -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="camel" viewBox="0 0 200 140">
+      <g fill="currentColor">
+        <path d="M40 60Q40 48 62 46Q92 44 120 52Q140 56 140 70Q138 86 118 88L62 88Q40 86 40 60Z"/>
+        <ellipse cx="82" cy="40" rx="18" ry="20"/>
+        <path d="M122 58Q150 54 156 32Q158 20 164 14L178 22Q174 32 172 46Q168 72 140 86Z"/>
+        <path d="M160 12Q176 4 194 18Q198 25 190 27L172 27Q164 25 160 12Z"/>
+        <path d="M112 82L125 82L122 134L111 134Z"/><path d="M96 84L108 84L108 134L97 134Z"/>
+        <path d="M52 82L65 82L62 134L51 134Z"/><path d="M70 84L82 84L81 134L70 134Z"/>
+        <path d="M42 56Q28 62 30 84L35 84Q35 68 44 64Z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="scene" id="scene"><img class="scene-bg" src="img/hero-bg.jpg" alt="A golden camel sculpture on a rock above the desert at sunset"></div>
+  <div class="dwrap" id="discoverWrap"><h1 class="discover" aria-label="Discover"><span>D</span><span>I</span><span>S</span><span>C</span><span>O</span><span>V</span><span>E</span><span>R</span></h1></div>
+  <div class="scene scene-fg" id="sceneFg"><img src="img/hero-fg.webp" alt=""></div>
+  <div class="dwrap outline" id="discoverOutline" aria-hidden="true"><div class="discover"><span>D</span><span>I</span><span>S</span><span>C</span><span>O</span><span>V</span><span>E</span><span>R</span></div></div>
+  <div class="hero-bottom">
+    <div class="hero-copy reveal">
+      <h2>Find the Camels.<br>Explore the Real UAE.</h2>
+      <p>A one-of-a-kind adventure to discover hidden camel sculptures, untold stories and extraordinary places beyond the tourist trail.</p>
+    </div>
+    <form class="finder reveal" id="finder">
+      <label>Region
+        <select id="fRegion"><option value="">All Regions</option><option>Dubai</option><option>Abu Dhabi</option><option>Sharjah</option><option>Ras Al Khaimah</option><option>Fujairah</option><option>Al Ain</option></select>
+      </label>
+      <label>Quest Type
+        <select id="fType"><option value="">All Quests</option><option>Sculpture Hunt</option><option>Desert Trail</option><option>Heritage Walk</option><option>Coast &amp; Mountains</option></select>
+      </label>
+      <label>Difficulty
+        <select id="fLevel"><option value="">All Levels</option><option>Easy</option><option>Moderate</option><option>Hard</option></select>
+      </label>
+      <button type="submit" class="btn-main">Find Your Next Quest <span>→</span></button>
+    </form>
+  </div>
+  <div class="scroll-cue">Scroll <i></i></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <p class="eyebrow reveal">About the Caravan</p>
+      <h2 class="statement" id="bigStatement">
+        <span>The UAE hides more than skyscrapers.</span>
+        <span>Out past the highways, camels made of metal, stone and story wait to be found.</span>
+        <span>Every sculpture is a clue. Every clue is a place.</span>
+      </h2>
+      <a class="link-arrow reveal" href="#journey">Follow the journey <i>→</i></a>
+    </div>
+    <figure class="arch reveal">
+      <img data-par src="img/about.jpg" alt="A camel sculpture on a rock at sunset" loading="lazy">
+      <figcaption>Where the trail leads</figcaption>
+    </figure>
+  </div>
+  <div class="stats">
+    <div class="stat reveal"><b data-count="7">0</b><small>Emirates</small></div>
+    <div class="stat reveal"><b data-count="60">0</b><small>Hidden camels</small></div>
+    <div class="stat reveal"><b data-count="24">0</b><small>Quests</small></div>
+  </div>
+</section>
+
+<!-- JOURNEY: pinned, scroll walks the camel across the emirates; each chapter changes the scene and colors -->
+<section class="journey" id="journey" aria-label="The journey across the emirates">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="palm" viewBox="0 0 200 300">
+        <path d="M95 300C99 230 103 160 109 92L121 92C117 160 113 232 116 300Z"/>
+        <g transform="translate(115 92)">
+          <path id="frond" d="M0 0C-30 -38 -75 -34 -110 12C-70 -12 -30 -10 0 8Z"/>
+          <use href="#frond" transform="rotate(48)"/><use href="#frond" transform="rotate(96)"/>
+          <use href="#frond" transform="rotate(144)"/><use href="#frond" transform="rotate(180) scale(1 -1)"/>
+          <use href="#frond" transform="rotate(-38)"/><use href="#frond" transform="rotate(218) scale(1 -1)"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+  <div class="jstage" id="jstage">
+    <!-- 1 Dubai: dunes and skyline -->
+    <div class="jscene" data-i="0">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d6f8a"/><stop offset=".55" stop-color="#d8a97a"/><stop offset="1" stop-color="#f0b87a"/></linearGradient>
+          <radialGradient id="s1"><stop offset="0" stop-color="#ffe2aa"/><stop offset=".4" stop-color="#ffc878" stop-opacity=".4"/><stop offset="1" stop-color="#ffc878" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="1600" height="900" fill="url(#g1)"/>
+        <circle cx="1130" cy="400" r="330" fill="url(#s1)"/>
+        <g class="lyr" data-d="1"><path fill="#9a6a4c" opacity=".75" d="M0 640L120 590 260 620 420 550 560 610 700 560 880 630 1040 580 1200 620 1380 560 1600 610V900H0Z"/></g>
+        <g class="lyr" data-d="2" fill="#7a4a35" opacity=".85"><rect x="300" y="560" width="14" height="70"/><rect x="322" y="540" width="12" height="90"/><rect x="344" y="575" width="18" height="55"/><rect x="372" y="520" width="9" height="110"/><rect x="392" y="565" width="16" height="65"/><rect x="418" y="548" width="12" height="82"/><rect x="440" y="580" width="20" height="50"/></g>
+        <g class="lyr" data-d="3"><path fill="#b0602d" d="M0 770C250 660 420 650 700 730S1200 810 1600 710V900H0Z"/></g>
+        <g class="lyr" data-d="5"><path fill="#7e3c17" d="M0 850C300 770 700 810 1000 830S1450 810 1600 840V900H0Z"/></g>
+      </svg>
+    </div>
+    <!-- 2 Al Ain: oasis -->
+    <div class="jscene" data-i="1">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fcf9a"/><stop offset=".55" stop-color="#f1e3a2"/><stop offset="1" stop-color="#e8c986"/></linearGradient></defs>
+        <rect width="1600" height="900" fill="url(#g2)"/>
+        <circle cx="400" cy="300" r="90" fill="#fff6c9" opacity=".8"/>
+        <g class="lyr" data-d="1"><path fill="#d9b567" opacity=".8" d="M0 640C300 560 520 600 800 620S1300 560 1600 620V900H0Z"/></g>
+        <g class="lyr" data-d="2" fill="#2f6b49" opacity=".75"><use href="#palm" x="180" y="470" width="130" height="195"/><use href="#palm" x="330" y="500" width="100" height="150"/><use href="#palm" x="1180" y="480" width="120" height="180"/><use href="#palm" x="1320" y="505" width="95" height="143"/></g>
+        <g class="lyr" data-d="3"><path fill="#5aa7a3" d="M300 790C500 740 1100 740 1300 790C1100 840 500 840 300 790Z"/><path fill="#e8f6e0" opacity=".35" d="M520 782C700 765 900 765 1080 782C900 796 700 796 520 782Z"/></g>
+        <g class="lyr" data-d="5" fill="#1f4a33"><use href="#palm" x="40" y="360" width="260" height="390"/><use href="#palm" x="1340" y="330" width="290" height="435"/><path d="M0 860C300 820 600 850 800 860S1300 830 1600 860V900H0Z"/></g>
+      </svg>
+    </div>
+    <!-- 3 Ras Al Khaimah: mountains -->
+    <div class="jscene" data-i="2">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7f9fbd"/><stop offset=".6" stop-color="#d7e2ea"/><stop offset="1" stop-color="#f1f4f6"/></linearGradient>
+        <linearGradient id="m3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".85"/></linearGradient></defs>
+        <rect width="1600" height="900" fill="url(#g3)"/>
+        <circle cx="1250" cy="260" r="70" fill="#fff" opacity=".7"/>
+        <g class="lyr" data-d="1"><path fill="#9db3c8" d="M0 600L160 470 300 560 470 400 640 540 800 430 980 560 1150 410 1330 540 1480 450 1600 520V900H0Z"/></g>
+        <g class="lyr" data-d="2"><path fill="#6d849c" d="M0 680L120 560 280 640 450 500 620 650 800 520 960 660 1140 540 1300 650 1460 560 1600 640V900H0Z"/></g>
+        <rect y="560" width="1600" height="200" fill="url(#m3)"/>
+        <g class="lyr" data-d="3"><path fill="#475f78" d="M0 760L180 650 340 730 540 620 720 740 920 640 1100 750 1300 650 1480 740 1600 690V900H0Z"/></g>
+        <g class="lyr" data-d="5"><path fill="#2a3a4c" d="M0 840L200 760 380 830 600 770 820 850 1040 780 1260 850 1440 790 1600 840V900H0Z"/><path fill="#3d6a4f" d="M520 880C700 840 900 840 1080 880V900H520Z"/></g>
+      </svg>
+    </div>
+    <!-- 4 Sharjah: old town at dusk -->
+    <div class="jscene" data-i="3">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d2b56"/><stop offset=".5" stop-color="#b8587a"/><stop offset="1" stop-color="#f4b38a"/></linearGradient></defs>
+        <rect width="1600" height="900" fill="url(#g4)"/>
+        <circle cx="300" cy="220" r="60" fill="#fff0cf" opacity=".95"/>
+        <g class="lyr" data-d="1" fill="#7d3c4c" opacity=".7"><path d="M0 700V600H80V560H170V610H260V570H360V620H470V560H560V600H680V570H790V620H900V580H1010V610H1120V560H1230V600H1350V570H1460V610H1600V700Z"/></g>
+        <g class="lyr" data-d="3" fill="#5a2a33"><path d="M120 900V620h40V560h20v-30h20v30h20v60h40V900Z"/><path d="M520 900V650h160V900Z"/><path d="M560 650a40 40 0 0 1 80 0Z"/><path d="M900 900V600h60V540h24v-26h20v26h24v60h60V900Z"/><path d="M1260 900V660h180V900Z"/><path d="M1300 660a50 50 0 0 1 100 0Z"/><rect x="0" y="860" width="1600" height="40"/></g>
+        <g class="lyr" data-d="4" fill="#ffd27a"><circle cx="150" cy="700" r="5"/><circle cx="190" cy="700" r="5"/><circle cx="560" cy="740" r="5"/><circle cx="640" cy="740" r="5"/><circle cx="930" cy="700" r="5"/><circle cx="1000" cy="700" r="5"/><circle cx="1320" cy="740" r="5"/><circle cx="1380" cy="740" r="5"/><circle cx="800" cy="820" r="7" opacity=".9"/><circle cx="1130" cy="800" r="7" opacity=".9"/></g>
+        <g class="lyr" data-d="5"><path fill="#241014" d="M0 880C300 860 600 875 900 870S1400 860 1600 880V900H0Z"/></g>
+      </svg>
+    </div>
+    <!-- 5 Fujairah: coast -->
+    <div class="jscene" data-i="4">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs><linearGradient id="g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fc6c9"/><stop offset=".55" stop-color="#e0f3ee"/><stop offset=".56" stop-color="#2a93a8"/><stop offset="1" stop-color="#0f4c64"/></linearGradient></defs>
+        <rect width="1600" height="900" fill="url(#g5)"/>
+        <circle cx="1020" cy="470" r="60" fill="#fff9de"/>
+        <rect x="900" y="495" width="240" height="10" fill="#fff9de" opacity=".5"/>
+        <g class="lyr" data-d="1" stroke="#fff" stroke-opacity=".28" fill="none" stroke-width="3"><path d="M0 560C200 548 300 572 500 560S800 548 1000 560 1400 572 1600 560"/><path d="M0 620C200 606 360 634 560 620S900 606 1120 620 1450 634 1600 620"/><path d="M0 690C260 672 420 706 700 690S1100 672 1300 690 1500 706 1600 690"/></g>
+        <g class="lyr" data-d="2" fill="#17303a" opacity=".9"><path d="M1180 540l60-12 10-30 8 30 70 12-70 8-20 10z"/><rect x="1236" y="470" width="3" height="60"/></g>
+        <g class="lyr" data-d="4"><path fill="#2b3a3a" d="M0 380L120 340 200 420 300 460 360 560 330 640 380 720 300 800 380 900H0Z"/><path fill="#3e5252" d="M0 600L120 580 160 680 120 760 200 860 120 900H0Z"/></g>
+        <g class="lyr" data-d="5"><path fill="#d8b98a" d="M900 900C1100 840 1350 830 1600 850V900Z"/></g>
+      </svg>
+    </div>
+    <!-- 6 Finale: night -->
+    <div class="jscene" data-i="5">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs><linearGradient id="g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070b1f"/><stop offset=".6" stop-color="#1d1646"/><stop offset="1" stop-color="#3a2461"/></linearGradient>
+        <radialGradient id="s6"><stop offset="0" stop-color="#f2cf8a" stop-opacity=".55"/><stop offset="1" stop-color="#f2cf8a" stop-opacity="0"/></radialGradient></defs>
+        <rect width="1600" height="900" fill="url(#g6)"/>
+        <g id="stars" class="lyr" data-d="1" fill="#fff"></g>
+        <circle cx="1230" cy="230" r="54" fill="#fff4d6"/><circle cx="1214" cy="218" r="54" fill="#1a1442" opacity=".0"/>
+        <g class="lyr" data-d="2"><path fill="#241a4a" d="M0 700C260 610 520 650 800 700S1300 640 1600 690V900H0Z"/></g>
+        <g class="lyr" data-d="4"><ellipse cx="560" cy="700" rx="320" ry="90" fill="url(#s6)"/><path fill="#140c24" d="M0 790C300 700 700 740 1000 780S1450 760 1600 790V900H0Z"/></g>
+        <g class="lyr" data-d="6"><path fill="#0b0716" d="M0 860C300 810 700 850 1000 860S1450 840 1600 860V900H0Z"/></g>
+      </svg>
+    </div>
+    <div class="jshade"></div>
+    <div class="jtexts" id="jtexts"></div>
+    <ol class="jdots" id="jdots" aria-label="Chapters"></ol>
+    <div class="jroute" id="jroute">
+      <div class="jline"><i id="jfill"></i></div>
+      <img class="jcamel" id="jcamel" src="img/logo-camel.png" alt="">
+      <div class="jstops" id="jstops"></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE QUEST (pinned; scroll moves the cards sideways) -->
+<section class="quest" id="quest">
+  <div class="quest-pin">
+    <div class="quest-head">
+      <p class="eyebrow">The Quest</p>
+      <h2 class="big small">How the hunt works</h2>
+    </div>
+    <div class="trail"><svg viewBox="0 0 1000 40" preserveAspectRatio="none"><path d="M0 20 Q 125 0 250 20 T 500 20 T 750 20 T 1000 20" fill="none" stroke="currentColor" stroke-dasharray="6 8" stroke-width="2"/></svg><img class="trail-camel" id="trailCamel" src="img/logo-camel.png" alt=""></div>
+    <div class="quest-track" id="questTrack">
+      <article class="step"><img src="img/c-sunset.jpg" alt="" loading="lazy"><div><span>01</span><h3>Read the clue</h3><p>Each quest opens with a riddle about a place and its story.</p></div></article>
+      <article class="step"><img src="img/c-dunes.jpg" alt="" loading="lazy"><div><span>02</span><h3>Follow the trail</h3><p>Drive, hike or wander. Routes run from city streets to open dunes.</p></div></article>
+      <article class="step"><img src="img/c-camel.jpg" alt="" loading="lazy"><div><span>03</span><h3>Find the camel</h3><p>Stand beside the sculpture. Snap the proof. Unlock its story.</p></div></article>
+      <article class="step"><img src="img/c-oasis.jpg" alt="" loading="lazy"><div><span>04</span><h3>Collect the story</h3><p>Fill your caravan map and earn your place in the journey.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="dest" id="destinations">
+  <div class="sec-head">
+    <div><p class="eyebrow reveal">Destinations</p><h2 class="big small reveal">Seven Emirates.<br>One long caravan.</h2></div>
+    <p class="sec-note reveal">Use the filters at the top of the page to narrow the quests by region, type and difficulty.</p>
+  </div>
+  <div class="cards" id="cards">
+    <article class="card tall reveal" data-region="Dubai" data-type="Sculpture Hunt" data-level="Easy"><img src="img/c-camel.jpg" alt="" loading="lazy"><div class="tags"><b>Sculpture Hunt</b><b>Easy</b></div><div class="meta"><small>Dubai</small><h3>City of Gold Camels</h3></div><i class="go">↗</i></article>
+    <article class="card reveal" data-region="Abu Dhabi" data-type="Heritage Walk" data-level="Easy"><img src="img/c-sunset.jpg" alt="" loading="lazy"><div class="tags"><b>Heritage Walk</b><b>Easy</b></div><div class="meta"><small>Abu Dhabi</small><h3>Qasr and Corniche</h3></div><i class="go">↗</i></article>
+    <article class="card wide reveal" data-region="Al Ain" data-type="Desert Trail" data-level="Moderate"><img src="img/wide.jpg" alt="" loading="lazy"><div class="tags"><b>Desert Trail</b><b>Moderate</b></div><div class="meta"><small>Al Ain</small><h3>Oasis and Dunes</h3></div><i class="go">↗</i></article>
+    <article class="card reveal" data-region="Ras Al Khaimah" data-type="Coast &amp; Mountains" data-level="Hard"><img src="img/c-mountains.jpg" alt="" loading="lazy"><div class="tags"><b>Coast &amp; Mountains</b><b>Hard</b></div><div class="meta"><small>Ras Al Khaimah</small><h3>Jebel Jais Ridge</h3></div><i class="go">↗</i></article>
+    <article class="card reveal" data-region="Sharjah" data-type="Heritage Walk" data-level="Easy"><img src="img/c-rock.jpg" alt="" loading="lazy"><div class="tags"><b>Heritage Walk</b><b>Easy</b></div><div class="meta"><small>Sharjah</small><h3>Old Souq Stories</h3></div><i class="go">↗</i></article>
+    <article class="card reveal" data-region="Fujairah" data-type="Coast &amp; Mountains" data-level="Moderate"><img src="img/c-oasis.jpg" alt="" loading="lazy"><div class="tags"><b>Coast &amp; Mountains</b><b>Moderate</b></div><div class="meta"><small>Fujairah</small><h3>East Coast Trail</h3></div><i class="go">↗</i></article>
+  </div>
+  <p class="empty" id="empty" hidden>No quests match yet. Try another filter.</p>
+</section>
+
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="sec-head">
+    <div><p class="eyebrow reveal">From the Blog</p><h2 class="big small reveal">Stories from the trail</h2></div>
+    <a class="link-arrow reveal" href="#">All stories <i>→</i></a>
+  </div>
+  <div class="posts">
+    <a class="post reveal" href="#"><div class="ph"><img src="img/c-rock.jpg" alt="" loading="lazy"></div><small>Coming soon</small><h3>Why a camel? The story behind the sculptures</h3></a>
+    <a class="post reveal" href="#"><div class="ph"><img src="img/c-dunes.jpg" alt="" loading="lazy"></div><small>Coming soon</small><h3>A first-timer's guide to desert quests</h3></a>
+    <a class="post reveal" href="#"><div class="ph"><img src="img/c-mountains.jpg" alt="" loading="lazy"></div><small>Coming soon</small><h3>Five hidden places outside Dubai</h3></a>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join" id="join">
+  <img class="join-bg" data-par src="img/join-bg.jpg" alt="" loading="lazy">
+  <div class="join-inner">
+    <p class="eyebrow reveal">The caravan is leaving</p>
+    <h2 class="big reveal">Join the Journey</h2>
+    <p class="join-sub reveal">Be first to hear when new quests open.</p>
+    <form class="signup reveal" id="signup">
+      <input type="email" placeholder="Your email" required aria-label="Email">
+      <button class="btn-main" type="submit">Join</button>
+    </form>
+    <p class="thanks" id="thanks" hidden>Thank you. The caravan will find you soon.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <a href="#home" class="f-logo"><img src="img/logo-camel.png" alt=""><span>Caravan Quest</span></a>
+  <nav><a href="#about">About</a><a href="#journey">Journey</a><a href="#quest">The Quest</a><a href="#destinations">Destinations</a><a href="#blog">Blog</a></nav>
+  <a href="https://www.instagram.com/thecaravanquest/">Instagram</a>
+  <span class="copy">© 2026 Caravan Quest</span>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
