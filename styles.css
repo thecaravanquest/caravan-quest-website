@@ -110,21 +110,21 @@ section:not(.hero){position:relative}
 .hground svg{position:absolute;left:0;bottom:0;width:100%;height:100%}
 .herd{position:absolute;left:0;right:0;bottom:calc(8vh + 12px);height:20vh;pointer-events:none;will-change:transform,opacity}
 .herd img{position:absolute;bottom:0;height:var(--h,12vh);width:auto;filter:brightness(0) opacity(.9)}
-.hcount{position:absolute;z-index:6;left:4vw;top:14vh;font-size:12px;letter-spacing:.26em;text-transform:uppercase;opacity:.85;display:flex;gap:18px;align-items:center}
+.hcount{position:absolute;z-index:6;left:4vw;top:max(112px,13vh);font-size:12px;letter-spacing:.26em;text-transform:uppercase;opacity:.85;display:flex;gap:18px;align-items:center}
 .hcount b{font-weight:400;letter-spacing:.2em;color:var(--gold)}
 .hcount i{display:block;width:60px;height:1px;background:rgba(255,255,255,.35);position:relative}
 .hcount i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w,25%);background:var(--gold);transition:width .6s}
-.hpanel{position:absolute;inset:0;z-index:5;display:grid;align-content:center;padding:20vh 8vw 12vh;opacity:0;visibility:hidden;will-change:transform,opacity}
+.hpanel{position:absolute;inset:0;z-index:5;display:grid;align-content:center;padding:max(190px,25vh) 8vw 9vh;opacity:0;visibility:hidden;will-change:transform,opacity}
 .hlabel{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;display:flex;align-items:center;gap:14px}
 .hlabel::before{content:"";width:34px;height:1px;background:currentColor}
-.hstory p{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.2vw,66px);line-height:1.1;max-width:19ch;margin-bottom:.5em;opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.hstory p{font-family:var(--serif);font-weight:600;font-size:clamp(24px,min(3.1vw,4.8vh),58px);line-height:1.12;max-width:24ch;margin-bottom:.45em;opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
 .hstory p.on{opacity:1;transform:none}
 .hstory p:last-child{color:var(--gold)}
-.hhead{font-family:var(--serif);font-weight:600;font-size:clamp(34px,4.6vw,72px);line-height:1;margin-bottom:34px;max-width:16ch}
+.hhead{font-family:var(--serif);font-weight:600;font-size:clamp(30px,min(4.4vw,7vh),68px);line-height:1;margin-bottom:clamp(18px,4vh,34px);max-width:18ch}
 .species-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,28px);max-width:1180px}
 .species{position:relative;padding:clamp(20px,2vw,30px);border:1px solid rgba(232,194,138,.3);border-radius:26px;background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:background .4s,border-color .4s,transform .4s}
-.splate{height:clamp(86px,13vh,140px);display:grid;place-items:center;margin-bottom:18px;position:relative}
-.splate img{height:78%;width:auto}
+.splate{height:clamp(70px,12vh,130px);display:flex;align-items:center;justify-content:center;margin-bottom:clamp(10px,2vh,18px);position:relative}
+.splate img{height:clamp(54px,9.5vh,104px);width:auto;max-width:none;flex:none}
 .species .sorig img{filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))}
 .species .ssecr img{-webkit-mask:linear-gradient(90deg,#000 0 26%,transparent 26% 33%,#000 33% 58%,transparent 58% 64%,#000 64%);mask:linear-gradient(90deg,#000 0 26%,transparent 26% 33%,#000 33% 58%,transparent 58% 64%,#000 64%);opacity:.85}
 .species .sdig::before,.species .sdig::after{content:"";position:absolute;width:22px;height:22px;border:2px solid var(--gold);opacity:.9}
@@ -132,15 +132,15 @@ section:not(.hero){position:relative}
 .species .sdig::after{right:18%;bottom:2px;border-left:0;border-top:0}
 .species .sdig img{opacity:.55;filter:drop-shadow(0 0 12px rgba(232,194,138,.7))}
 .species .sdig em{position:absolute;right:20%;top:6px;font-style:normal;font-size:10px;letter-spacing:.2em;color:var(--gold)}
-.species b{display:block;font-family:var(--serif);font-size:clamp(22px,2.1vw,32px);color:var(--gold);margin-bottom:8px}
-.species p{font-size:14px;line-height:1.55;opacity:.88}
+.species b{display:block;font-family:var(--serif);font-size:clamp(22px,min(2.1vw,3.6vh),32px);color:var(--gold);margin-bottom:8px}
+.species p{font-size:clamp(13px,1.9vh,15px);line-height:1.5;opacity:.88}
 .species.pulse{background:rgba(201,123,61,.3);border-color:var(--clay);transform:translateY(-8px)}
 .hplay .words{display:grid;gap:0;margin-bottom:28px}
-.hplay .words span{font-family:var(--display);font-size:clamp(70px,13vw,210px);line-height:.92;color:transparent;-webkit-text-stroke:1.5px var(--gold);opacity:.18;transition:opacity .5s,color .5s}
+.hplay .words span{font-family:var(--display);font-size:clamp(64px,min(13vw,17vh),200px);line-height:.92;color:transparent;-webkit-text-stroke:1.5px var(--gold);opacity:.18;transition:opacity .5s,color .5s}
 .hplay .words span.on{opacity:1;color:var(--gold)}
-.hplay p.lead{font-size:clamp(16px,1.4vw,21px);line-height:1.65;max-width:44ch;opacity:.92}
+.hplay p.lead{font-size:clamp(15px,min(1.4vw,2.3vh),21px);line-height:1.65;max-width:44ch;opacity:.92}
 .hland{grid-template-columns:1.1fr .9fr;gap:6vw;align-items:center}
-.hland p.lead{font-size:clamp(16px,1.35vw,20px);line-height:1.7;max-width:46ch;opacity:.92;margin-bottom:14px}
+.hland p.lead{font-size:clamp(15px,min(1.35vw,2.3vh),20px);line-height:1.7;max-width:46ch;opacity:.92;margin-bottom:14px}
 .anchor{justify-self:center;width:min(300px,60%);filter:drop-shadow(0 20px 40px rgba(0,0,0,.4))}
 .anchor svg{width:100%;height:auto;display:block}
 
@@ -235,9 +235,9 @@ footer{background:#0c0703;color:var(--cream);padding:9vh 4vw 5vh;overflow:hidden
   .fact+.fact{border-top:1px solid rgba(27,18,9,.16);padding-top:30px!important}
   .species-grid{grid-template-columns:1fr;gap:10px}
   .species{display:grid;grid-template-columns:90px 1fr;column-gap:16px;align-items:center;padding:14px 16px}
-  .splate{height:70px;margin:0}.species b,.species p{grid-column:2}
+  .splate{height:70px;margin:0}.splate img{height:54px}.species b,.species p{grid-column:2}
   .hland{grid-template-columns:1fr}.anchor{display:none}
-  .hpanel{padding:22vh 6vw 10vh}
+  .hpanel{padding:max(170px,24vh) 6vw 8vh}
   .hmoon{top:20vh}
   .hhead{margin-bottom:18px}
   .f-grid{grid-template-columns:1fr 1fr}.f-grid>div:first-child{grid-column:1/-1}
