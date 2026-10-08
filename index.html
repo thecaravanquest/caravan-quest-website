@@ -82,30 +82,47 @@
   <div class="scroll-cue">Scroll <i></i></div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT: a pinned photo that changes while three statements scroll past -->
 <section class="about" id="about">
-  <div class="about-grid">
-    <div class="about-text">
-      <p class="eyebrow reveal">About Caravan Quest</p>
-      <h2 class="statement" id="bigStatement">
-        <span>An eco-art scavenger hunt across the Emirates.</span>
-        <span>Large handmade camels, built from recycled materials, wait in places most visitors never see.</span>
-        <span>Find them. Learn the story behind each place.</span>
-      </h2>
-      <a class="link-arrow reveal" href="#hunt">How the hunt works <i>→</i></a>
+  <div class="abt">
+    <div class="abt-media" aria-hidden="true">
+      <div class="abt-frame">
+        <img class="abt-img on" src="img/route-rak.jpg" alt="" data-cap="Jebel Jais, Ras Al Khaimah">
+        <img class="abt-img" src="img/route-uaq.jpg" alt="" data-cap="Umm Al Quwain Mangrove Park">
+        <img class="abt-img" src="img/route-fujairah.jpg" alt="" data-cap="Fujairah Fort">
+        <div class="abt-shade"></div>
+        <div class="abt-cap"><span id="abtCap">Jebel Jais, Ras Al Khaimah</span><b id="abtIdx">01 / 03</b></div>
+        <div class="abt-bar"><i id="abtBar"></i></div>
+      </div>
     </div>
-    <div class="collage reveal" aria-label="Places along the route">
-      <figure class="cf cf1"><img data-par=".05" src="img/route-rak.jpg" alt="Mountains at Jebel Jais at sunset" loading="lazy"><figcaption>Ras Al Khaimah</figcaption></figure>
-      <figure class="cf cf2"><img data-par=".11" src="img/route-uaq.jpg" alt="Mangroves at Umm Al Quwain" loading="lazy"><figcaption>Umm Al Quwain</figcaption></figure>
-      <figure class="cf cf3"><img data-par=".16" src="img/route-fujairah.jpg" alt="Fujairah Fort with mountains behind it" loading="lazy"><figcaption>Fujairah</figcaption></figure>
+    <div class="abt-copy">
+      <article class="abt-step">
+        <img class="abt-mimg" src="img/route-rak.jpg" alt="Mountains at Jebel Jais" loading="lazy">
+        <p class="eyebrow">About Caravan Quest</p>
+        <h2>An eco-art scavenger hunt across the Emirates.</h2>
+        <p class="abt-p">Camel sculptures that connect art, culture and nature, and invite families to explore landscapes they would not usually see.</p>
+      </article>
+      <article class="abt-step">
+        <img class="abt-mimg" src="img/route-uaq.jpg" alt="Mangroves at Umm Al Quwain" loading="lazy">
+        <p class="eyebrow">The camels</p>
+        <h2>Large, handmade, and built from recycled materials.</h2>
+        <p class="abt-p">Each one marks a heritage or nature site beyond the city centres, and is designed to sit lightly on the land with no concrete foundation.</p>
+      </article>
+      <article class="abt-step">
+        <img class="abt-mimg" src="img/route-fujairah.jpg" alt="Fujairah Fort" loading="lazy">
+        <p class="eyebrow">The hunt</p>
+        <h2>Find them. Learn the story behind each place.</h2>
+        <p class="abt-p">Finding a camel scores points. Answering a question about the place scores more.</p>
+        <a class="link-arrow" href="#hunt">How the hunt works <i>→</i></a>
+      </article>
     </div>
   </div>
-  <div class="stats">
-    <div class="stat reveal"><b data-count="3">0</b><small>Kinds of camels</small></div>
-    <div class="stat reveal"><b data-count="7">0</b><small>Emirates in the vision</small></div>
-    <div class="stat reveal"><b data-count="10">0</b><small>Sculptures planned for year one</small></div>
+
+  <div class="facts">
+    <div class="fact reveal"><b data-count="3">0</b><h3>Kinds of camels</h3><p>The Originals, The Secretive and The Digital Ones.</p></div>
+    <div class="fact reveal"><b data-count="7">0</b><h3>Emirates in the vision</h3><p>From Abu Dhabi to Fujairah, one connected route.</p></div>
+    <div class="fact reveal"><b data-count="10">0</b><h3>Sculptures planned</h3><p>For year one. Launch phase: none are installed yet.</p></div>
   </div>
-  <p class="fine reveal">Caravan Quest is in its launch phase. Numbers show the plan, not sculptures already installed.</p>
 </section>
 
 <!-- THE HUNT (vertical story) -->

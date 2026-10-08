@@ -27,7 +27,6 @@
   // ---- Elements ----
   const nav = $('#nav'), bar = $('#progress'), hero = $('.hero');
   const disc = $('#discoverWrap'), discO = $('#discoverOutline'), scene = $('#scene'), sceneFg = $('#sceneFg');
-  const lines = $$('#bigStatement span');
   const links = $$('.nav-links a'), secs = links.map(a => $(a.getAttribute('href')));
 
   // ---- The Route: pinned stage; each emirate's scene rises up as you scroll down ----
@@ -65,6 +64,24 @@
     }
   };
 
+  // ---- About: the pinned photo follows the statement you are reading ----
+  const abtSteps = $$('.abt-step'), abtImgs = $$('.abt-img'), abtCap = $('#abtCap'), abtIdx = $('#abtIdx'), abtBar = $('#abtBar');
+  let lastAbt = -1;
+  const aboutUpdate = vh => {
+    let cur = 0, best = 1e9;
+    abtSteps.forEach((s, i) => {
+      const r = s.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - vh * .5);
+      if (d < best) { best = d; cur = i; }
+      s.classList.toggle('on', r.top < vh * .62 && r.bottom > vh * .38);
+    });
+    if (cur === lastAbt) return;
+    lastAbt = cur;
+    abtImgs.forEach((im, i) => im.classList.toggle('on', i === cur));
+    abtCap.textContent = abtImgs[cur].dataset.cap;
+    abtIdx.textContent = '0' + (cur + 1) + ' / 0' + abtSteps.length;
+    abtBar.style.width = ((cur + 1) / abtSteps.length * 100) + '%';
+  };
+
   let ticking = false;
   const update = () => {
     ticking = false;
@@ -80,9 +97,7 @@
       disc.style.opacity = discO.style.opacity = 1 - p * .9;
     }
 
-    // Statement lines light up one by one
-    lines.forEach(l => l.classList.toggle('lit', l.getBoundingClientRect().top < vh * .68));
-
+    aboutUpdate(vh);
     routeUpdate(vh);
 
     // The Hunt: the block you are reading lights up
