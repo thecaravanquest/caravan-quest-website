@@ -140,9 +140,12 @@ section:not(.hero){position:relative}
 .hplay .words span.on{opacity:1;color:var(--gold)}
 .hplay p.lead{font-size:clamp(15px,min(1.4vw,2.3vh),21px);line-height:1.65;max-width:44ch;opacity:.92}
 .hland{grid-template-columns:1.1fr .9fr;gap:6vw;align-items:center}
+.care{list-style:none;display:grid;gap:0;justify-self:stretch;max-width:520px}
+.care li{display:flex;gap:22px;align-items:baseline;padding:clamp(16px,3vh,26px) 0;border-top:1px solid rgba(232,194,138,.3)}
+.care li:last-child{border-bottom:1px solid rgba(232,194,138,.3)}
+.care b{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vh,44px);color:transparent;-webkit-text-stroke:1.2px var(--gold);flex:none;width:2.2ch}
+.care span{font-family:var(--serif);font-weight:600;font-size:clamp(22px,min(2.2vw,3.6vh),34px);line-height:1.15}
 .hland p.lead{font-size:clamp(15px,min(1.35vw,2.3vh),20px);line-height:1.7;max-width:46ch;opacity:.92;margin-bottom:14px}
-.anchor{justify-self:center;width:min(300px,60%);filter:drop-shadow(0 20px 40px rgba(0,0,0,.4))}
-.anchor svg{width:100%;height:auto;display:block}
 
 /* ---------- THE ROUTE (unchanged) ---------- */
 .route{height:900vh;padding:0;background:#120b05;color:#fff}
@@ -236,7 +239,7 @@ footer{background:#0c0703;color:var(--cream);padding:9vh 4vw 5vh;overflow:hidden
   .species-grid{grid-template-columns:1fr;gap:10px}
   .species{display:grid;grid-template-columns:90px 1fr;column-gap:16px;align-items:center;padding:14px 16px}
   .splate{height:70px;margin:0}.splate img{height:54px}.species b,.species p{grid-column:2}
-  .hland{grid-template-columns:1fr}.anchor{display:none}
+  .hland{grid-template-columns:1fr;gap:20px}
   .hpanel{padding:max(170px,24vh) 6vw 8vh}
   .hmoon{top:20vh}
   .hhead{margin-bottom:18px}
