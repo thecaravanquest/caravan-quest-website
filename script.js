@@ -4,126 +4,39 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-  // Reveal on scroll
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { threshold: .15 });
-  $$('.reveal').forEach(el => io.observe(el));
+  // one reveal: each element rises once, visible without script
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -10% 0px' });
+  $$('[data-reveal]').forEach((el) => io.observe(el));
 
-  // Count-up numbers
-  const cio = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el = e.target, end = +el.dataset.count, t0 = performance.now();
-    const tick = t => {
-      const p = clamp((t - t0) / 1400);
-      el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-    cio.unobserve(el);
-  }), { threshold: .6 });
-  $$('[data-count]').forEach(el => cio.observe(el));
-
-  // ---- Elements ----
-  const nav = $('#nav'), bar = $('#progress'), hero = $('.hero');
-  const disc = $('#discoverWrap'), discO = $('#discoverOutline'), scene = $('#scene'), sceneFg = $('#sceneFg');
-  const links = $$('.nav-links a'), secs = links.map(a => $(a.getAttribute('href')));
-
-  // ---- Intro: words light up as you scroll ----
-  const scrub = $('#scrub'), scrubText = $('#scrubText'), scrubNote = $('#scrubNote');
-  const words = scrubText.textContent.trim().split(/\s+/);
-  scrubText.innerHTML = words.map(w => `<span class="w">${w}</span>`).join(' ');
-  const wEls = $$('.w', scrubText);
-  const scrubUpdate = vh => {
-    const r = scrub.getBoundingClientRect();
-    if (r.top > vh || r.bottom < 0) return;
-    const f = clamp(-r.top / (scrub.offsetHeight - vh));
-    const k = f / .78 * wEls.length;
-    wEls.forEach((w, i) => w.classList.toggle('on', i < k));
-    scrubNote.classList.toggle('on', f > .86);
+  // route: the sticky plate follows the row that crosses the middle of the screen
+  const rows = $$('.route-row'), plates = $$('.route-plates img');
+  const setRoute = (i) => {
+    rows.forEach((r, k) => r.classList.toggle('is-active', k === i));
+    plates.forEach((p, k) => {
+      if (k === i && p.loading === 'lazy') p.loading = 'eager';
+      p.classList.toggle('is-on', k === i);
+    });
   };
-
-  // ---- The Hunt: pinned night story ----
-  const hunt = $('#hunt'), hpanels = $$('.hpanel'), HN = hpanels.length;
-  const hstars = $('#hstars'), hmoon = $('#hmoon'), herd = $('#herd'), hnum = $('#hnum'), hbar = $('#hbar');
-  const storyLines = $$('.hstory p'), words3 = $$('.hplay .words span');
-  for (let k = 0; k < 130; k++) {
-    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    c.setAttribute('cx', Math.round(Math.random() * 1600)); c.setAttribute('cy', Math.round(Math.random() * 640));
-    c.setAttribute('r', (Math.random() * 1.7 + .4).toFixed(1)); c.setAttribute('fill', '#fff');
-    c.setAttribute('opacity', (Math.random() * .7 + .25).toFixed(2));
-    hstars.appendChild(c);
+  if (rows.length) {
+    const rio = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) setRoute(+e.target.dataset.i);
+    }), { rootMargin: '-45% 0px -45% 0px' });
+    rows.forEach((r) => rio.observe(r));
   }
-  let lastHunt = -1;
-  const huntUpdate = vh => {
-    const r = hunt.getBoundingClientRect();
-    if (r.top > vh || r.bottom < 0) return;
-    const f = clamp(-r.top / (hunt.offsetHeight - vh)), p = f * (HN - 1), cur = Math.round(p);
-    hpanels.forEach((el, i) => {
-      // the story panel holds until its three lines have appeared; the others hold briefly so they can be read
-      const d = i === 0 ? Math.max(0, p - .5) : p - i;
-      const o = clamp(1 - Math.max(0, Math.abs(d) - (i === 0 ? 0 : .12)) * 2.4);
-      el.style.opacity = o; el.style.visibility = o > .02 ? 'visible' : 'hidden';
-      el.style.transform = `translate3d(0,${d * -70}px,0)`;
-    });
-    const u = clamp(p / .4);
-    storyLines.forEach((l, k) => l.classList.toggle('on', u > .08 + k * .34));
-    const m = clamp(p / .95);
-    herd.style.transformOrigin = '50% 100%';
-    herd.style.transform = `translate3d(0,${-m * 12}vh,0) scale(${1 - m * .55})`;
-    herd.style.opacity = 1 - m * .9;
-    hstars.style.transform = `translate3d(0,${-p * 36}px,0)`;
-    hmoon.style.transform = `translate3d(0,${-p * 50}px,0)`;
-    words3.forEach((w, k) => w.classList.toggle('on', p - 2 > -.3 + k * .24));
-    if (cur !== lastHunt) {
-      lastHunt = cur;
-      hnum.textContent = '0' + (cur + 1) + ' / 0' + HN;
-      hbar.style.setProperty('--w', ((cur + 1) / HN * 100) + '%');
-    }
-  };
 
-  // ---- The Route: pinned stage; each emirate's scene rises up as you scroll down ----
-  const route = $('#route'), rscenes = $$('.rscene'), rtexts = $$('.rtext'), N = rtexts.length;
-  const rfill = $('#rfill'), rcamel = $('#rcamel'), rdots = $('#rdots'), rstage = $('#rstage');
-  const dotEls = rtexts.map((t, i) => {
-    const s = document.createElement('span'); s.style.top = (i / (N - 1) * 100) + '%';
-    rdots.appendChild(s); return s;
-  });
-  let lastCh = -1;
-  const routeUpdate = vh => {
-    const r = route.getBoundingClientRect();
-    if (r.top > vh || r.bottom < 0) { if (lastCh !== -2) { document.documentElement.style.removeProperty('--prog'); lastCh = -2; } return; }
-    const f = clamp(-r.top / (route.offsetHeight - vh));
-    const p = f * (N - 1), cur = Math.round(p);
-    rscenes.forEach((sc, i) => {
-      const t = i === 0 ? 0 : (1 - clamp(p - (i - 1))) * 100;
-      sc.style.transform = `translate3d(0,${t}%,0)`;
-      sc.style.visibility = t >= 100 ? 'hidden' : 'visible';
-      $$('.lyr', sc).forEach(l => { l.style.transform = `translate3d(0,${(i - p) * (+l.dataset.d) * 26}px,0)`; });
-    });
-    rtexts.forEach((t, i) => {
-      const dd = p - i, o = clamp(1 - Math.abs(dd) * 2.2);
-      t.style.opacity = o; t.style.visibility = o > .02 ? 'visible' : 'hidden';
-      t.style.transform = `translate3d(0,${dd * -70}px,0)`;
-    });
-    rfill.style.height = (f * 100) + '%';
-    rcamel.style.top = (f * 100) + '%';
-    dotEls.forEach((d, i) => d.classList.toggle('done', i <= p + .02));
-    if (cur !== lastCh) {
-      lastCh = cur;
-      const ac = rtexts[cur].dataset.color;
-      rstage.style.setProperty('--ac', ac);
-      document.documentElement.style.setProperty('--prog', ac);
-    }
-  };
-
+  // nav: solid after the hero starts to leave, current section marked
+  const nav = $('#nav'), hero = $('.hero');
+  const disc = $('#discoverWrap'), discO = $('#discoverOutline'), scene = $('#scene'), sceneFg = $('#sceneFg');
+  const links = $$('.nav-links a'), secs = links.map((a) => $(a.getAttribute('href')));
   let ticking = false;
   const update = () => {
     ticking = false;
     const y = scrollY, vh = innerHeight;
-    bar.style.width = (y / (document.documentElement.scrollHeight - vh) * 100) + '%';
     nav.classList.toggle('solid', y > 60);
 
+    // the hero: DISCOVER and the scene drift and fade as you leave, as before
     if (!reduce && y < hero.offsetHeight) {
       const p = clamp(y / (vh * .9));
       const s = `translate3d(0,${y * .28}px,0) scale(${1 + p * .08})`;
@@ -132,16 +45,7 @@
       disc.style.opacity = discO.style.opacity = 1 - p * .9;
     }
 
-    scrubUpdate(vh);
-    huntUpdate(vh);
-    routeUpdate(vh);
-
-    $$('[data-par]').forEach(im => {
-      const r = im.parentElement.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < vh) im.style.transform = `translate3d(0,${(r.top + r.height / 2 - vh / 2) * -(parseFloat(im.dataset.par) || .07)}px,0)`;
-    });
-
-    let cur = 0;
+    let cur = -1;
     secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < vh * .4) cur = i; });
     links.forEach((a, i) => a.classList.toggle('active', i === cur));
   };
@@ -150,69 +54,54 @@
   addEventListener('resize', onScroll);
   update();
 
-  // Glass dropdowns: replace native select lists (browsers can't style them)
-  $$('.finder select').forEach(sel => {
-    const wrapEl = document.createElement('div'); wrapEl.className = 'dd';
-    sel.parentNode.insertBefore(wrapEl, sel); wrapEl.appendChild(sel);
-    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'dd-btn';
-    btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
-    const list = document.createElement('ul'); list.className = 'dd-list'; list.setAttribute('role', 'listbox'); list.tabIndex = -1;
-    const items = [...sel.options].map((o, i) => {
-      const li = document.createElement('li'); li.textContent = o.textContent; li.setAttribute('role', 'option'); li.dataset.i = i;
-      list.appendChild(li); return li;
-    });
-    wrapEl.append(btn, list);
-    let act = sel.selectedIndex;
-    const paint = () => {
-      btn.textContent = sel.options[sel.selectedIndex].textContent;
-      items.forEach((li, i) => { li.setAttribute('aria-selected', i === sel.selectedIndex); li.classList.toggle('act', i === act); });
+  // the hunt on the page: two Originals, a Secretive camel that needs both, a Digital one
+  (() => {
+    const KEY = 'cq-found';
+    const camels = $$('[data-camel]'), count = $('#tallyCount'), note = $('#tallyNote'), say = $('#announce'), finale = $('#finale');
+    if (!camels.length) return;
+    let found = [];
+    try { found = JSON.parse(localStorage.getItem(KEY) || '[]').filter((k) => ['a', 's', 'd'].includes(k)); } catch (e) { found = []; }
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(found)); } catch (e) { /* private mode: the hunt still works */ } };
+    const unlocked = () => found.includes('a') && found.includes('d');
+    const label = { a: 'an Original', s: 'a Secretive camel', d: 'a Digital camel' };
+    let timer;
+    const paint = (msg) => {
+      camels.forEach((c) => {
+        const k = c.dataset.camel, got = found.includes(k);
+        c.classList.toggle('is-found', got);
+        if (k === 's') c.hidden = !(unlocked() || got);
+        c.setAttribute('aria-label', got ? 'A camel you found.' : (k === 's' ? 'A secretive camel has appeared. Press to find it.' : (k === 'd' ? 'A digital camel. Press to find it.' : 'A hidden camel. Press to find it.')));
+      });
+      count.textContent = 'Found ' + found.length + ' of 3';
+      finale.hidden = found.length < 3;
+      if (msg) {
+        note.textContent = msg; note.classList.add('is-on'); say.textContent = count.textContent + '. ' + msg;
+        clearTimeout(timer); timer = setTimeout(() => { note.classList.remove('is-on'); }, 6000);
+      }
     };
-    const open = v => {
-      wrapEl.classList.toggle('open', v); btn.setAttribute('aria-expanded', v);
-      if (v) { $$('.dd.open').forEach(d => d !== wrapEl && d.classList.remove('open')); act = sel.selectedIndex; paint(); }
-    };
-    const pick = i => { sel.selectedIndex = i; sel.dispatchEvent(new Event('change', { bubbles: true })); open(false); paint(); btn.focus(); };
-    btn.addEventListener('click', () => open(!wrapEl.classList.contains('open')));
-    list.addEventListener('click', e => { const li = e.target.closest('li'); if (li) pick(+li.dataset.i); });
-    btn.addEventListener('keydown', e => {
-      const isOpen = wrapEl.classList.contains('open');
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault(); if (!isOpen) return open(true);
-        act = clamp(act + (e.key === 'ArrowDown' ? 1 : -1), 0, items.length - 1); paint();
-      } else if ((e.key === 'Enter' || e.key === ' ') && isOpen) { e.preventDefault(); pick(act); }
-      else if (e.key === 'Escape') open(false);
-    });
-    document.addEventListener('click', e => { if (!wrapEl.contains(e.target)) open(false); });
-    sel.addEventListener('change', () => { act = sel.selectedIndex; paint(); });
+    camels.forEach((c) => c.addEventListener('click', () => {
+      const k = c.dataset.camel;
+      if (found.includes(k) || (k === 's' && !unlocked())) return;
+      found.push(k); save();
+      const wasLocked = !unlocked();
+      paint(k === 's' ? 'You found the Secretive one.' : (k === 'd' ? 'You found a Digital one.' : 'You found ' + label[k] + '.') + (!wasLocked && (k === 'a' || k === 'd') && !found.includes('s') ? ' Something rare has appeared near the end of the page.' : ''));
+    }));
+    $('#again').addEventListener('click', () => { found = []; save(); paint('Starting again.'); scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
     paint();
-  });
+  })();
 
-  // Start the Hunt: filter the route by site type, then jump to the region or camel type chosen
-  const jumpTo = (sec, frac) => {
-    const top = sec.getBoundingClientRect().top + scrollY, span = sec.offsetHeight - innerHeight;
-    scrollTo({ top: top + span * frac, behavior: 'smooth' });
-  };
-  $('#finder').addEventListener('submit', e => {
-    e.preventDefault();
-    const region = $('#fRegion').value, kind = $('#fType').value, species = $('#fLevel').value;
-    $$('.sites li').forEach(li => li.classList.toggle('hide', !!kind && li.dataset.kind !== kind));
-    $$('.species').forEach(s => s.classList.remove('pulse'));
-    if (region) {
-      const i = rtexts.findIndex(t => t.dataset.region === region);
-      if (i >= 0) return jumpTo(route, i / (N - 1));
-    }
-    if (species) {
-      const card = $$('.species').find(s => s.dataset.species === species);
-      if (card) card.classList.add('pulse');
-      return jumpTo(hunt, 1 / (HN - 1));
-    }
-    jumpTo(route, 0);
-  });
-
-  // Signup: front end only for now
-  $('#signup').addEventListener('submit', e => {
-    e.preventDefault();
-    e.target.hidden = true;
-    $('#thanks').hidden = false;
+  // sign-up: says plainly when nothing is connected yet
+  $$('form[data-endpoint]').forEach((form) => {
+    const input = $('input', form), help = $('[aria-live]', form);
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const ok = input.checkValidity();
+      input.toggleAttribute('aria-invalid', !ok);
+      if (!ok) { help.textContent = 'That address looks incomplete. Write it as name@example.com.'; input.focus(); return; }
+      if (!form.dataset.endpoint) { help.textContent = 'Nothing was sent: sign-ups are not connected yet. Follow @thecaravanquest on Instagram for news.'; return; }
+      fetch(form.dataset.endpoint, { method: 'POST', body: new FormData(form) })
+        .then((r) => { help.textContent = r.ok ? 'Thanks. We will write to ' + input.value.trim() + '.' : 'That did not go through. Try again in a minute.'; })
+        .catch(() => { help.textContent = 'That did not go through. Try again in a minute.'; });
+    });
   });
 })();

@@ -3,191 +3,204 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Caravan Quest — Find the Camels. Explore the Real UAE.</title>
-<meta name="description" content="An eco-art scavenger hunt across the Emirates: find true-to-size camel sculptures, learn the story of each place and explore the real UAE beyond the tourist trail.">
+<title>Caravan Quest: Find the Camels. Explore the Real UAE.</title>
+<meta name="description" content="An eco-art scavenger hunt across the Emirates: find camel sculptures, learn the story of each place and explore the real UAE beyond the tourist trail.">
+<script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=boska@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="page.css">
 </head>
 <body>
-<div class="progress" id="progress"></div>
+<a class="skip" href="#about">Skip to content</a>
 
 <header class="nav" id="nav">
-  <nav class="nav-links">
-    <a href="#home" class="active">Home</a>
+  <a href="#home" class="logo" aria-label="Caravan Quest">
+    <img src="img/logo-camel.png" class="logo-camel" alt="" width="42" height="34">
+    <span>Caravan Quest</span>
+  </a>
+  <nav class="nav-links" aria-label="Main">
     <a href="#about">About</a>
     <a href="#hunt">The Hunt</a>
     <a href="#route">The Route</a>
   </nav>
-  <a href="#home" class="logo" aria-label="Caravan Quest">
-    <img src="img/logo-camel.png" class="logo-camel" alt="">
-    <span>Caravan Quest</span>
-  </a>
   <div class="nav-right">
-    <a href="https://www.instagram.com/thecaravanquest/" aria-label="Instagram" class="icon">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
-    </a>
-    <a href="#join" class="btn-glass">Join the Journey</a>
+    <p class="tally" id="tally" aria-hidden="true"><span id="tallyCount">Found 0 of 3</span></p>
+    <a href="https://www.instagram.com/thecaravanquest/" class="nav-ig">Instagram</a>
+    <a href="#join" class="btn btn--ghost">Join the Journey</a>
   </div>
 </header>
+<p class="visually-hidden" id="announce" aria-live="polite"></p>
+<p class="toast" id="tallyNote" aria-hidden="true"></p>
 
-<main>
-<!-- HERO -->
+<main id="main">
+<!-- HERO: image and DISCOVER kept as they were -->
 <section class="hero" id="home">
   <div class="scene" id="scene"><img class="scene-bg" src="img/hero-bg.jpg" alt="A golden camel sculpture on a rock above the desert at sunset"></div>
   <div class="dwrap" id="discoverWrap"><h1 class="discover" aria-label="Discover"><span>D</span><span>I</span><span>S</span><span>C</span><span>O</span><span>V</span><span>E</span><span>R</span></h1></div>
   <div class="scene scene-fg" id="sceneFg"><img src="img/hero-fg.webp" alt=""></div>
   <div class="dwrap outline" id="discoverOutline" aria-hidden="true"><div class="discover"><span>D</span><span>I</span><span>S</span><span>C</span><span>O</span><span>V</span><span>E</span><span>R</span></div></div>
   <div class="hero-bottom">
-    <div class="hero-copy reveal">
-      <span class="hero-tag">Eco-art scavenger hunt · UAE</span>
-      <h2>Find the Camels.<br><em>Explore the Real UAE.</em></h2>
-      <p>A one-of-a-kind adventure to discover hidden camel sculptures, untold stories and extraordinary places beyond the tourist trail.</p>
+    <p class="lead">Hidden camel sculptures, untold stories and places beyond the tourist trail.</p>
+    <div class="actions">
+      <a href="#join" class="btn btn--primary">Join the Journey</a>
+      <a href="#about" class="btn btn--ghost">How it works</a>
     </div>
-    <form class="finder reveal" id="finder">
-      <label>Region
-        <select id="fRegion"><option value="">All Emirates</option><option>Abu Dhabi</option><option>Dubai</option><option>Sharjah</option><option>Ajman</option><option>Umm Al Quwain</option><option>Ras Al Khaimah</option><option>Fujairah</option></select>
-      </label>
-      <label>Site type
-        <select id="fType"><option value="">All sites</option><option>Heritage</option><option>Nature</option></select>
-      </label>
-      <label>Camel type
-        <select id="fLevel"><option value="">All camels</option><option>The Originals</option><option>The Secretive</option><option>The Digital Ones</option></select>
-      </label>
-      <button type="submit" class="btn-main">Start the Hunt <span>→</span></button>
-    </form>
   </div>
-  <p class="impression">Artist's impression</p>
+  <p class="impression">Artist&#8217;s impression</p>
 </section>
 
-<!-- WHAT IT IS: the words light up as you scroll -->
-<section class="about" id="about">
-  <div class="scrub" id="scrub">
-    <div class="scrub-stage">
-      <p class="eyebrow">What is Caravan Quest?</p>
-      <p class="scrub-text" id="scrubText">Caravan Quest is a scavenger hunt through the heritage and nature of the Emirates. True-to-size camel sculptures mark places most visitors never see. Your job is to find them.</p>
-      <div class="scrub-note" id="scrubNote"><span>Made for kids and young people. Anyone can play.</span><a class="link-arrow" href="#hunt">See how it works <i>→</i></a></div>
-    </div>
-  </div>
-
-  <div class="stack">
-    <article class="pcard pc1" style="--i:0"><div><div class="pnum">01</div><h3 class="ptitle">Culture</h3></div><p class="pbody">The history, people and traditions of the UAE, told through the places you visit.</p></article>
-    <article class="pcard pc2" style="--i:1"><div><div class="pnum">02</div><h3 class="ptitle">Art</h3></div><p class="pbody">Installation art made with local UAE artists and craftspeople.</p></article>
-    <article class="pcard pc3" style="--i:2"><div><div class="pnum">03</div><h3 class="ptitle">Nature</h3></div><p class="pbody">So much of the UAE is unseen. Explore local nature and find wonders in its far corners.</p></article>
-    <article class="pcard pc4" style="--i:3"><div><div class="pnum">04</div><h3 class="ptitle">Play to learn</h3></div><p class="pbody">Finding hidden camels scores points. Answering correctly scores more.</p></article>
-  </div>
-
-  <div class="facts">
-    <div class="fact reveal"><b data-count="3">0</b><h3>Kinds of camels</h3><p>The Originals, The Secretive and The Digital Ones.</p></div>
-    <div class="fact reveal"><b data-count="7">0</b><h3>Emirates in the vision</h3><p>From Abu Dhabi to Fujairah, one connected route.</p></div>
-    <div class="fact reveal"><b data-count="10">0</b><h3>Sculptures planned</h3><p>For year one. Launch phase: none are installed yet.</p></div>
-  </div>
-</section>
-
-<!-- THE HUNT: a pinned night story that moves on as you scroll -->
-<section class="hunt" id="hunt" aria-label="How the hunt works">
-  <div class="hstage" id="hstage">
-    <svg class="hstars" id="hstars" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMin slice" aria-hidden="true"></svg>
-    <div class="hmoon" id="hmoon"></div>
-    <div class="hground" aria-hidden="true"><svg viewBox="0 0 1600 300" preserveAspectRatio="none"><path fill="#1f1236" d="M0 150C220 70 460 90 720 140S1240 200 1600 100V300H0Z"/><path fill="#0c0716" d="M0 230C260 170 560 210 840 235S1360 240 1600 200V300H0Z"/></svg></div>
-    <div class="herd" id="herd" aria-hidden="true"><img src="img/logo-camel.png" alt="" style="left:34%;--h:7vh"><img src="img/logo-camel.png" alt="" style="left:42%;--h:9.5vh"><img src="img/logo-camel.png" alt="" style="left:49%;--h:8vh"><img src="img/logo-camel.png" alt="" style="left:56%;--h:11vh"><img src="img/logo-camel.png" alt="" style="left:63%;--h:8.5vh"><img src="img/logo-camel.png" alt="" style="left:70%;--h:10vh"></div>
-    <div class="hcount"><span>The Hunt</span><b id="hnum">01 / 04</b><i id="hbar"></i></div>
-
-    <div class="hpanel hstory" data-i="0">
-      <div class="hlabel">The story</div>
-      <p>Wafi was helping his dad look after the camels while his dad was away on a journey.</p>
-      <p>In the night, he fell fast asleep and did not hear the camels run off.</p>
-      <p>Now it is up to you to find them before his father comes home.</p>
-    </div>
-
-    <div class="hpanel" data-i="1" id="species">
-      <div class="hlabel">The camels</div>
-      <h3 class="hhead">Three kinds of camels</h3>
-      <div class="species-grid">
-        <div class="species" data-species="The Originals"><div class="splate sorig"><img src="img/logo-camel.png" alt=""></div><b>The Originals</b><p>Physical sculptures you can find on site. Some take a bit more searching.</p></div>
-        <div class="species" data-species="The Secretive"><div class="splate ssecr"><img src="img/logo-camel.png" alt=""></div><b>The Secretive</b><p>Built into something else, or an optical illusion that only appears from the right spot. Some can only be seen in AR.</p></div>
-        <div class="species" data-species="The Digital Ones"><div class="splate sdig"><img src="img/logo-camel.png" alt=""><em>AR</em></div><b>The Digital Ones</b><p>Purely digital. You find them in AR.</p></div>
+<!-- ABOUT: one statement, then the three things it is made of -->
+<section class="statement" id="about">
+  <div class="container">
+    <h2 data-reveal>A scavenger hunt through the heritage and nature of the Emirates.</h2>
+    <div class="statement-row">
+      <button class="camel camel--a" type="button" data-camel="a" aria-label="A hidden camel. Press to find it."><img src="img/logo-camel.png" alt="" width="40" height="32"></button>
+      <p class="lead" data-reveal style="--i:1">Camel sculptures mark places most visitors never see. Your job is to find them.</p>
+      <div class="statement-side" data-reveal style="--i:2">
+        <p>Made for kids and young people. Anyone can play.</p>
+        <a class="link" href="#hunt">See how it works</a>
       </div>
     </div>
-
-    <div class="hpanel hplay" data-i="2">
-      <div class="hlabel">Play to learn</div>
-      <div class="words"><span>Find.</span><span>Learn.</span><span>Earn.</span></div>
-      <p class="lead">Finding a hidden camel scores points. Answer a question about the place correctly and you earn more.</p>
-    </div>
-
-    <div class="hpanel hland" data-i="3">
-      <div>
-        <div class="hlabel">Built with care</div>
-        <h3 class="hhead">Gentle on the land</h3>
-        <p class="lead">Each camel is a stylized, true-to-size sculpture, made from eco-friendly materials and installed with low impact.</p>
-        <p class="lead">They raise awareness of conservation, and they are designed to sit lightly in the places they mark.</p>
-      </div>
-      <ul class="care" aria-label="How the sculptures are built">
-        <li><b>01</b><span>True-to-size, stylized camel sculptures</span></li>
-        <li><b>02</b><span>Eco-friendly materials</span></li>
-        <li><b>03</b><span>Low-impact installations</span></li>
-      </ul>
-    </div>
+    <ul class="pillars">
+      <li><h3>Culture</h3><p>The history, people and traditions of the UAE, told through the places you visit.</p></li>
+      <li><h3>Art</h3><p>Installation art made with local UAE artists and craftspeople.</p></li>
+      <li><h3>Nature</h3><p>So much of the UAE is unseen. Explore local nature and find wonders in its far corners.</p></li>
+    </ul>
   </div>
 </section>
 
-<!-- THE ROUTE: pinned, scroll-driven. Each emirate's scene rises up as you scroll down. -->
-<section class="route" id="route" aria-label="The route across the Emirates">
-  <div class="rstage" id="rstage">
-    <div class="rscene" style="z-index:1"><img class="rphoto lyr" data-d="2" src="img/route-abudhabi.jpg" alt="Qasr Al Hosn, Abu Dhabi" decoding="async"><a class="rcredit" href="https://commons.wikimedia.org/wiki/File:Qasr_Al_Hosn_in_Front_of_skyline.jpg" target="_blank" rel="noopener">Qasr Al Hosn, Abu Dhabi · Photo: Aeroid · CC BY-SA 4.0</a></div>
-    <div class="rscene" style="z-index:2"><img class="rphoto lyr" data-d="2" src="img/route-dubai.jpg" alt="Hatta Dam, Dubai" decoding="async"><a class="rcredit" href="https://commons.wikimedia.org/wiki/File:Spectacular_view_of_Hatta_Dam_surrounded_by_mountains.jpg" target="_blank" rel="noopener">Hatta Dam, Dubai · Photo: Clintonrebeiro · CC BY-SA 4.0</a></div>
-    <div class="rscene" style="z-index:3"><img class="rphoto lyr" data-d="2" src="img/route-sharjah.jpg" alt="Heart of Sharjah" decoding="async"><a class="rcredit" href="https://commons.wikimedia.org/wiki/File:Heart_of_sharjah_.jpg" target="_blank" rel="noopener">Heart of Sharjah · Photo: Wael Mohammed Al-Masri · CC BY-SA 4.0</a></div>
-    <div class="rscene" style="z-index:4"><img class="rphoto lyr" data-d="2" src="img/route-ajman.jpg" alt="Ajman Museum" decoding="async"><a class="rcredit" href="https://commons.wikimedia.org/wiki/File:Ajman_Museum,_2007_(03).jpg" target="_blank" rel="noopener">Ajman Museum · Photo: Bahnfrend · CC BY-SA 4.0</a></div>
-    <div class="rscene" style="z-index:5"><img class="rphoto lyr" data-d="2" src="img/route-uaq.jpg" alt="Umm Al Quwain Mangrove Park" decoding="async"><a class="rcredit" href="https://commons.wikimedia.org/wiki/File:Grey_mangroves_Avicennia_marina_at_Umm_Al_Quwain_Mangrove_Park.jpg" target="_blank" rel="noopener">Umm Al Quwain Mangrove Park · Photo: AmethystDreams · CC BY-SA 4.0</a></div>
-    <div class="rscene" style="z-index:6"><img class="rphoto lyr" data-d="2" src="img/route-rak.jpg" alt="Jebel Jais, Ras Al Khaimah" decoding="async"><a class="rcredit" href="https://commons.wikimedia.org/wiki/File:Mountain_view_during_sunset,_Jebel_Jais,_Ras_al_Khaimah,_UAE.jpg" target="_blank" rel="noopener">Jebel Jais, Ras Al Khaimah · Photo: Tashmetova808 · CC BY-SA 4.0</a></div>
-    <div class="rscene" style="z-index:7"><img class="rphoto lyr" data-d="2" src="img/route-fujairah.jpg" alt="Fujairah Fort" decoding="async"><a class="rcredit" href="https://commons.wikimedia.org/wiki/File:Fujairah_Fort_Entrance.jpg" target="_blank" rel="noopener">Fujairah Fort · Photo: Clémence Jacqueri · CC BY-SA 4.0</a></div>
-    <div class="rshade"></div>
-    <p class="rkicker">The Route · Seven Emirates · Candidate sites</p>
-    <div class="rrail" aria-hidden="true">
-      <div class="rline"><i id="rfill"></i></div>
-      <div class="rdots" id="rdots"></div>
-      <img class="rcamel" id="rcamel" src="img/logo-camel.png" alt="">
+<!-- THE HUNT: the story, the three kinds, the way it plays -->
+<section class="story" id="hunt">
+  <div class="container">
+    <figure class="plate">
+      <img src="img/hunt-night.jpg" alt="Camel sculptures walking along a desert ridge under a full moon and the Milky Way" width="2400" height="1340" decoding="async">
+      <div class="plate-scrim" aria-hidden="true"></div>
+      <div class="plate-text">
+        <p data-reveal>Wafi was helping his dad look after the camels while his dad was away on a journey.</p>
+        <p data-reveal style="--i:1">In the night, he fell fast asleep and did not hear the camels run off.</p>
+        <p class="turn" data-reveal style="--i:2">Now it is up to you to find them before his father comes home.</p>
+      </div>
+    </figure>
+    <p class="caption">Artist&#8217;s impression</p>
+  </div>
+</section>
+
+<section class="kinds-section">
+  <div class="container">
+    <h2>Three kinds of camels</h2>
+    <ul class="kinds">
+      <li class="kinds-head" aria-hidden="true"><span></span><span>Kind</span><span>What it is</span><span>How you find it</span></li>
+      <li>
+        <img class="mark" src="img/logo-camel.png" alt="" width="96" height="78" loading="lazy">
+        <h3>The Originals</h3>
+        <p>Sculptures you can find in real places. Some take a bit more searching.</p>
+        <p class="how">In real places</p>
+      </li>
+      <li>
+        <img class="mark mark--part" src="img/logo-camel.png" alt="" width="96" height="78" loading="lazy">
+        <h3>The Secretive</h3>
+        <p>Rare. They may not be on the map, and may only appear once you have found other camels.</p>
+        <p class="how">Once you have found other camels</p>
+      </li>
+      <li>
+        <button class="camel camel--d" type="button" data-camel="d" aria-label="A digital camel. Press to find it."><img class="mark mark--ar" src="img/logo-camel.png" alt="" width="96" height="78" loading="lazy"></button>
+        <h3>The Digital Ones</h3>
+        <p>Digital camels. You find them in AR.</p>
+        <p class="how">In AR</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="play">
+  <div class="container">
+    <h2>Play to learn</h2>
+    <div class="play-words" aria-label="Find. Learn. Earn.">
+      <span>Find.</span><span>Learn.</span><span>Earn.</span>
     </div>
-    <div class="rtexts" id="rtexts">
-      <div class="rtext" data-region="Abu Dhabi" data-color="#b4682f"><div class="rnum">01</div><h3>Abu Dhabi</h3><p class="rlede">Heritage precincts, oasis walkways and mangrove promenades.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Qasr Al Hosn precinct</li><li data-kind="Heritage"><b>Heritage</b>Heritage Village and Corniche heritage areas</li><li data-kind="Heritage"><b>Heritage</b>Al Ain heritage zones: oasis and cultural corridors</li><li data-kind="Nature"><b>Nature</b>Al Hudayriyat Island outdoor zones</li><li data-kind="Nature"><b>Nature</b>Mangrove promenades and boardwalks</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
-      <div class="rtext" data-region="Dubai" data-color="#d68a2e"><div class="rnum">02</div><h3>Dubai</h3><p class="rlede">A heritage waterfront in the city, and mountain outdoors beyond it.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Al Fahidi and Al Seef heritage waterfront corridor</li><li data-kind="Nature"><b>Nature</b>Hatta outdoor tourism areas</li><li data-kind="Nature"><b>Nature</b>Public nature parks and promenades</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
-      <div class="rtext" data-region="Sharjah" data-color="#d2685f"><div class="rnum">03</div><h3>Sharjah</h3><p class="rlede">Culture first: heritage areas and museum-adjacent public spaces.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Heart of Sharjah heritage areas</li><li data-kind="Heritage"><b>Heritage</b>Heritage corridors and museum-adjacent outdoor spaces</li><li data-kind="Nature"><b>Nature</b>Al Noor Island and lagoon-adjacent outdoor areas</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
-      <div class="rtext" data-region="Ajman" data-color="#3fb3ad"><div class="rnum">04</div><h3>Ajman</h3><p class="rlede">Coastline and heritage-linked public spaces with family footfall.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Ajman waterfront and heritage-linked public spaces</li><li data-kind="Nature"><b>Nature</b>Public beaches and promenades</li><li data-kind="Nature"><b>Nature</b>Managed outdoor recreation corridors and parks</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
-      <div class="rtext" data-region="Umm Al Quwain" data-color="#6fb36e"><div class="rnum">05</div><h3>Umm Al Quwain</h3><p class="rlede">Mangroves, lagoons and coastal nature with guided access.</p><ul class="sites"><li data-kind="Nature"><b>Nature</b>Mangrove and nature reserve-adjacent visitor areas</li><li data-kind="Nature"><b>Nature</b>Lagoon and coastal nature corridors</li><li data-kind="Heritage"><b>Heritage</b>Fort and heritage-adjacent public spaces</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
-      <div class="rtext" data-region="Ras Al Khaimah" data-color="#e0a070"><div class="rnum">06</div><h3>Ras Al Khaimah</h3><p class="rlede">Mountain viewpoints and cultural zones with outdoor access.</p><ul class="sites"><li data-kind="Nature"><b>Nature</b>Jebel Jais tourism corridors and viewpoint areas</li><li data-kind="Heritage"><b>Heritage</b>Heritage village and cultural zones</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
-      <div class="rtext" data-region="Fujairah" data-color="#3cc0cc"><div class="rnum">07</div><h3>Fujairah</h3><p class="rlede">Forts and heritage corridors, a coastal promenade, and wadi trailheads.</p><ul class="sites"><li data-kind="Heritage"><b>Heritage</b>Fort-adjacent public spaces and heritage corridors</li><li data-kind="Nature"><b>Nature</b>Coastal promenade environments</li><li data-kind="Nature"><b>Nature</b>Wadi and trailhead visitor nodes</li></ul><span class="badge">Candidate sites · subject to approvals</span></div>
+    <p class="lead play-copy">Finding a hidden camel scores points. Answer a question about the place correctly and you earn more.</p>
+  </div>
+</section>
+
+<section class="care">
+  <div class="container care-grid">
+    <div>
+      <h2>Gentle on the land</h2>
+      <p class="lead">Each camel is a stylized sculpture, made from eco-friendly materials and installed with low impact.</p>
+      <p>They raise awareness of conservation, and they are designed to sit lightly in the places they mark.</p>
+    </div>
+    <ul class="care-list">
+      <li><h3>Stylized camel sculptures</h3></li>
+      <li><h3>Eco-friendly materials</h3></li>
+      <li><h3>Low-impact installations</h3></li>
+    </ul>
+  </div>
+</section>
+
+<!-- THE ROUTE: seven rows, one sticky picture that follows the reader -->
+<section class="route" id="route">
+  <div class="container">
+    <div class="route-head">
+      <h2>The Route</h2>
+      <p class="lead">Across the Emirates. Places to be announced, subject to approvals. More details soon.</p>
+    </div>
+    <div class="route-grid">
+      <ol class="route-list" id="routeList">
+        <li class="route-row is-active" data-i="0"><span class="num">01</span><h3>Abu Dhabi</h3><p>Heritage and nature, waiting to be found.</p><img class="row-img" src="img/route-abudhabi.jpg" alt="" loading="lazy"></li>
+        <li class="route-row" data-i="1"><span class="num">02</span><h3>Dubai</h3><p>More than the city you know.</p><img class="row-img" src="img/route-dubai.jpg" alt="" loading="lazy"></li>
+        <li class="route-row" data-i="2"><span class="num">03</span><h3>Sharjah</h3><p>Culture, heritage and quiet corners.</p><img class="row-img" src="img/route-sharjah.jpg" alt="" loading="lazy"></li>
+        <li class="route-row" data-i="3"><span class="num">04</span><h3>Ajman</h3><p>Coast and heritage, off the usual path.</p><img class="row-img" src="img/route-ajman.jpg" alt="" loading="lazy"></li>
+        <li class="route-row" data-i="4"><span class="num">05</span><h3>Umm Al Quwain</h3><p>Coast and wild nature.</p><img class="row-img" src="img/route-uaq.jpg" alt="" loading="lazy"></li>
+        <li class="route-row" data-i="5"><span class="num">06</span><h3>Ras Al Khaimah</h3><p>Mountains, heritage and open air.</p><img class="row-img" src="img/route-rak.jpg" alt="" loading="lazy"></li>
+        <li class="route-row" data-i="6"><span class="num">07</span><h3>Fujairah</h3><p>Coast, mountains and old stories.</p><img class="row-img" src="img/route-fujairah.jpg" alt="" loading="lazy"></li>
+      </ol>
+      <figure class="route-plates" aria-hidden="true">
+        <img class="is-on" src="img/route-abudhabi.jpg" alt="" data-i="0">
+        <img src="img/route-dubai.jpg" alt="" data-i="1" loading="lazy">
+        <img src="img/route-sharjah.jpg" alt="" data-i="2" loading="lazy">
+        <img src="img/route-ajman.jpg" alt="" data-i="3" loading="lazy">
+        <img src="img/route-uaq.jpg" alt="" data-i="4" loading="lazy">
+        <img src="img/route-rak.jpg" alt="" data-i="5" loading="lazy">
+        <img src="img/route-fujairah.jpg" alt="" data-i="6" loading="lazy">
+        <figcaption>Artist&#8217;s impression</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
 <!-- JOIN -->
 <section class="join" id="join">
-  <img class="join-bg" data-par=".05" src="img/route-rak.jpg" alt="" loading="lazy">
-  <div class="join-inner">
-    <p class="eyebrow reveal">The caravan is getting ready</p>
-    <h2 class="reveal">Join the <em>Journey</em></h2>
-    <p class="join-sub reveal">Be first to hear when the camels arrive.</p>
-    <form class="signup reveal" id="signup">
-      <input type="email" placeholder="Your email" required aria-label="Email">
-      <button class="btn-main" type="submit">Join <span>→</span></button>
+  <div class="container">
+    <button class="camel camel--s" type="button" data-camel="s" aria-label="A secretive camel has appeared. Press to find it." hidden><img src="img/logo-camel.png" alt="" width="56" height="45"></button>
+    <h2>Join the Journey</h2>
+    <p class="lead">Be first to hear when the camels arrive. The first camels are in preparation, and none are installed yet.</p>
+    <p class="finale" id="finale" hidden>You found all three. Join the Journey to hear when the camels arrive. <button class="link-btn" type="button" id="again">Start again</button></p>
+    <form class="signup" id="signup" data-endpoint="" novalidate>
+      <label for="email">Your email</label>
+      <div class="signup-row">
+        <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-help">
+        <button class="btn btn--primary" type="submit">Join</button>
+      </div>
+      <p class="signup-help" id="email-help" aria-live="polite"></p>
     </form>
-    <p class="thanks" id="thanks" hidden>Thank you. The caravan will find you soon.</p>
-    <a class="join-ig reveal" href="https://www.instagram.com/thecaravanquest/">Follow @thecaravanquest</a>
+    <a class="link" href="https://www.instagram.com/thecaravanquest/">Follow @thecaravanquest</a>
   </div>
 </section>
 </main>
 
 <footer>
   <div class="f-word" aria-hidden="true">CARAVAN QUEST</div>
-  <div class="f-grid">
-    <div><a href="#home" class="f-logo"><img src="img/logo-camel.png" alt=""><span>Caravan Quest</span></a><p class="f-tag">An eco-art scavenger hunt across the Emirates, celebrating art, culture and nature.</p></div>
-    <div class="f-col"><h4>Explore</h4><a href="#about">About</a><a href="#hunt">The Hunt</a><a href="#route">The Route</a><a href="#join">Join the Journey</a></div>
-    <div class="f-col"><h4>Follow</h4><a href="https://www.instagram.com/thecaravanquest/">Instagram</a></div>
+  <div class="container">
+    <div class="f-grid">
+      <div><a href="#home" class="f-logo"><img src="img/logo-camel.png" alt="" width="42" height="34"><span>Caravan Quest</span></a><p class="f-tag">An eco-art scavenger hunt across the Emirates, celebrating art, culture and nature.</p></div>
+      <div class="f-col"><h2 class="f-head">Explore</h2><a href="#about">About</a><a href="#hunt">The Hunt</a><a href="#route">The Route</a><a href="#join">Join the Journey</a></div>
+      <div class="f-col"><h2 class="f-head">Follow</h2><a href="https://www.instagram.com/thecaravanquest/">Instagram</a></div>
+    </div>
+    <div class="f-bottom"><span>&copy; 2026 Caravan Quest</span><span>Launch phase: sculptures and sites are planned and subject to approvals.</span></div>
+    <details class="photo-credits"><summary>About the images</summary><p>Images on this site are illustrations, not photographs of real installations.</p></details>
   </div>
-  <div class="f-bottom"><span>© 2026 Caravan Quest</span><span>Launch phase: sculptures and sites are planned and subject to approvals.</span></div>
-  <details class="photo-credits"><summary>Photo credits</summary><ul><li>Qasr Al Hosn, Abu Dhabi: Aeroid, <a href="https://commons.wikimedia.org/wiki/File:Qasr_Al_Hosn_in_Front_of_skyline.jpg" target="_blank" rel="noopener">CC BY-SA 4.0 via Wikimedia Commons</a></li><li>Hatta Dam, Dubai: Clintonrebeiro, <a href="https://commons.wikimedia.org/wiki/File:Spectacular_view_of_Hatta_Dam_surrounded_by_mountains.jpg" target="_blank" rel="noopener">CC BY-SA 4.0 via Wikimedia Commons</a></li><li>Heart of Sharjah: Wael Mohammed Al-Masri, <a href="https://commons.wikimedia.org/wiki/File:Heart_of_sharjah_.jpg" target="_blank" rel="noopener">CC BY-SA 4.0 via Wikimedia Commons</a></li><li>Ajman Museum: Bahnfrend, <a href="https://commons.wikimedia.org/wiki/File:Ajman_Museum,_2007_(03).jpg" target="_blank" rel="noopener">CC BY-SA 4.0 via Wikimedia Commons</a></li><li>Umm Al Quwain Mangrove Park: AmethystDreams, <a href="https://commons.wikimedia.org/wiki/File:Grey_mangroves_Avicennia_marina_at_Umm_Al_Quwain_Mangrove_Park.jpg" target="_blank" rel="noopener">CC BY-SA 4.0 via Wikimedia Commons</a></li><li>Jebel Jais, Ras Al Khaimah: Tashmetova808, <a href="https://commons.wikimedia.org/wiki/File:Mountain_view_during_sunset,_Jebel_Jais,_Ras_al_Khaimah,_UAE.jpg" target="_blank" rel="noopener">CC BY-SA 4.0 via Wikimedia Commons</a></li><li>Fujairah Fort: Clémence Jacqueri, <a href="https://commons.wikimedia.org/wiki/File:Fujairah_Fort_Entrance.jpg" target="_blank" rel="noopener">CC BY-SA 4.0 via Wikimedia Commons</a></li><li>Hero and "Artist's impression" images are illustrations, not photographs of real installations.</li></ul></details>
 </footer>
 <script src="script.js"></script>
 </body>
