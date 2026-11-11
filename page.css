@@ -257,3 +257,10 @@ html:not(.js) .camel { display: none; }
 @media (max-width: 30rem) { .tally { display: none !important; } }
 
 @media (max-width: 60rem) { .camel--d { width: 72px; } }
+
+/* phones: the portrait hero picture; DISCOVER moves into the open sky above the camel, and the desktop cut-out layers (made for the wide picture) stay off */
+@media (max-width: 40rem) {
+  .scene-fg, .dwrap.outline { display: none; }
+  .dwrap { --lb: 0.27; }
+  .scene img { object-position: 50% 50%; }
+}
