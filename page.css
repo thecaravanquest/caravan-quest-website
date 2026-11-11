@@ -196,7 +196,7 @@ footer { background: var(--color-paper); color: var(--color-ink); padding: var(-
 
 /* ---------- small screens ---------- */
 @media (max-width: 60rem) {
-  .nav { grid-template-columns: minmax(0, 1fr) auto; }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
   .nav-links, .nav-ig { display: none; }
   .statement-row .lead, .statement-side { grid-column: 1 / -1; }
   .statement-side { margin-top: var(--space-lg); }
@@ -263,4 +263,19 @@ html:not(.js) .camel { display: none; }
   .scene-fg, .dwrap.outline { display: none; }
   .dwrap { --lb: 0.27; }
   .scene img { object-position: 50% 50%; }
+}
+
+/* nav at small widths: everything scales down in steps so nothing can collide */
+@media (max-width: 40rem) {
+  .nav { padding-inline: var(--space-md); gap: var(--space-sm); }
+  .logo { min-width: 0; gap: var(--space-xs); font-size: var(--text-lg); }
+  .logo-camel { width: 34px; flex: none; }
+  .nav-right { flex: none; gap: var(--space-sm); }
+  .nav .btn { min-height: 40px; padding: 0 var(--space-md); font-size: var(--text-sm); }
+}
+@media (max-width: 24rem) { .btn-more { display: none; } .logo { font-size: var(--text-md); } }
+@media (max-width: 75rem) {
+  .nav { padding-inline: var(--space-lg); gap: var(--space-md); }
+  .nav-ig { display: none; }
+  .nav-links { gap: var(--space-lg); }
 }
